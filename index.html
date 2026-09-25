@@ -171,24 +171,33 @@ h1,h2,h3{text-wrap:balance}
   box-shadow:inset 0 1px 2px rgba(255,255,255,0.6);
 }
 
-/* TOP FLAP (THE HINGING LID - Photoshop Multi-Layer Depth & Pronounced Shadow) */
+/* TOP FLAP WRAPPER (Renders Unclipped Realistic Drop Shadow onto Pocket) */
+.env-flap-top-wrapper{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:6;
+  pointer-events:none;
+  transform-origin:top center;
+  filter:
+    drop-shadow(0 6px 12px rgba(18,5,2,0.42))
+    drop-shadow(0 18px 34px rgba(18,5,2,0.55))
+    drop-shadow(0 42px 76px rgba(18,5,2,0.4));
+  will-change:transform, filter, opacity;
+  transition:transform 1s cubic-bezier(0.35, 0, 0.2, 1), filter 0.8s ease, opacity 0.45s 0.95s ease;
+}
+
+/* TOP FLAP (THE HINGING LID - Photoshop Multi-Layer Depth) */
 .env-flap-top{
   position:absolute;
   inset:0;
+  width:100%;
+  height:100%;
   clip-path:polygon(0 0, 50% 50%, 100% 0);
   background:
     radial-gradient(ellipse at 35% 20%, rgba(255,255,255,0.95) 0%, transparent 60%),
     linear-gradient(175deg, #FFFEFA 0%, #F8EFE4 35%, #EADDC8 72%, #D4C0A2 100%);
-  transform-origin:top center;
-  filter:
-    drop-shadow(0 4px 8px rgba(20,5,2,0.38))
-    drop-shadow(0 14px 26px rgba(20,5,2,0.46))
-    drop-shadow(0 34px 60px rgba(20,5,2,0.36))
-    drop-shadow(0 64px 95px rgba(20,5,2,0.22));
-  z-index:6;
-  pointer-events:none;
-  will-change:transform, filter;
-  transition:transform 1s cubic-bezier(0.35, 0, 0.2, 1), filter 0.8s ease;
 }
 .env-flap-top::before{
   content:"";
@@ -207,7 +216,7 @@ h1,h2,h3{text-wrap:balance}
 }
 
 /* =========================================================
-   EMBOSSED MONOGRAM SEAL (ROYAL CRIMSON RED & GOLD-LIGHT)
+   EMBOSSED MONOGRAM SEAL (STATIC ROYAL CRIMSON RED & GOLD-LIGHT)
    ========================================================= */
 .seal-container{
   position:absolute;
@@ -228,15 +237,15 @@ h1,h2,h3{text-wrap:balance}
   background:
     radial-gradient(circle at 34% 28%, #D33D29 0%, #A82B19 40%, #7D1A0D 80%, #540D04 100%);
   box-shadow:
-    0 22px 48px -6px rgba(45,8,4,0.65),
-    0 8px 20px rgba(0,0,0,0.3),
-    0 0 0 2px rgba(244,229,202,0.85),
-    0 0 0 4px rgba(168,43,25,0.5),
+    0 24px 50px -6px rgba(45,8,4,0.68),
+    0 8px 22px rgba(0,0,0,0.32),
+    0 0 0 2.5px rgba(244,229,202,0.9),
+    0 0 0 4.5px rgba(168,43,25,0.5),
+    0 0 22px rgba(201,147,62,0.3),
     inset 0 4px 8px rgba(255,255,255,0.45),
     inset 0 -6px 14px rgba(40,6,2,0.6);
   display:grid;
   place-items:center;
-  animation:sealBreathing 3.6s infinite ease-in-out;
 }
 .embossed-seal::before{
   content:"";
@@ -293,29 +302,6 @@ h1,h2,h3{text-wrap:balance}
   fill:#FFF5E3;
 }
 
-@keyframes sealBreathing{
-  0%, 100%{
-    transform:scale(1);
-    box-shadow:
-      0 20px 44px -6px rgba(45,8,4,0.6),
-      0 0 0 2px rgba(244,229,202,0.8),
-      0 0 0 4px rgba(168,43,25,0.4),
-      0 0 16px 2px rgba(201,147,62,0.25),
-      inset 0 4px 8px rgba(255,255,255,0.4),
-      inset 0 -6px 14px rgba(40,6,2,0.6);
-  }
-  50%{
-    transform:scale(1.03);
-    box-shadow:
-      0 26px 54px -6px rgba(45,8,4,0.72),
-      0 0 32px 10px rgba(201,147,62,0.5),
-      0 0 0 2.5px rgba(244,229,202,0.95),
-      0 0 0 5px rgba(201,147,62,0.6),
-      inset 0 5px 10px rgba(255,255,255,0.5),
-      inset 0 -7px 16px rgba(40,6,2,0.7);
-  }
-}
-
 /* =========================================================
    STAGED REALISTIC OPENING & WATER-UP LIQUID PULL-OUT
    ========================================================= */
@@ -328,14 +314,14 @@ h1,h2,h3{text-wrap:balance}
 }
 
 /* 2. Top Lid Flap hinges UP 180° in smooth 3D */
-#envelopeScreen.is-opening .env-flap-top{
+#envelopeScreen.is-opening .env-flap-top-wrapper{
   transform:rotateX(180deg);
-  filter:drop-shadow(0 -20px 30px rgba(0,0,0,0.18));
+  filter:drop-shadow(0 -18px 28px rgba(0,0,0,0.2));
   opacity:0;
   transition:transform 1.25s 0.08s cubic-bezier(0.25, 1, 0.35, 1), filter 1s ease, opacity 0.45s 0.95s ease;
 }
 
-/* 3. The 3 remaining pocket flaps stay INTACT and glide DOWN as one unit */
+/* 3. The remaining pocket stays INTACT and glides DOWN as one unit */
 #envelopeScreen.is-opening .env-pocket{
   transform:translateY(115vh);
   opacity:0;
@@ -963,8 +949,10 @@ html.static .sq path,html.static .wavy path{stroke-dashoffset:0!important;transi
   <!-- Unified Seamless Envelope Pocket Body -->
   <div class="env-pocket"></div>
 
-  <!-- Top Flap Lid (Opens upwards in 3D) -->
-  <div class="env-flap-top"></div>
+  <!-- Top Flap Lid (With unclipped drop shadow wrapper) -->
+  <div class="env-flap-top-wrapper">
+    <div class="env-flap-top"></div>
+  </div>
 
   <!-- Embossed J&P Seal with Botanical Olive Laurel Wreath -->
   <div class="seal-container" id="waxSealContainer">
