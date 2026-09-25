@@ -482,25 +482,26 @@ h1,h2,h3{text-wrap:balance}
   filter:drop-shadow(0 -12px 22px rgba(0,0,0,0.12));
   opacity:0;
   transition:
-    transform 1.8s 0.4s cubic-bezier(0.76, 0, 0.24, 1),
-    filter 1.4s 0.4s ease,
-    opacity 0.5s 2.0s ease;
+    transform 1.6s 0.4s cubic-bezier(0.76, 0, 0.24, 1),
+    filter 1.2s 0.4s ease,
+    opacity 0.4s 1.8s ease;
 }
 
-/* Act 3 — Pocket slides down softly, like the envelope body sinking */
+/* Act 3 — Pocket slides down softly */
 #envelopeScreen.is-opening .env-pocket{
   transform:translateY(108vh);
   opacity:0;
   transition:
-    transform 1.6s 1.3s cubic-bezier(0.4, 0, 0.2, 1),
-    opacity 0.9s 2.0s ease;
+    transform 1.4s 0.9s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.6s 1.5s ease;
 }
 
-/* Act 4 — Envelope screen itself fades out last */
+/* L-CUT: Overlay itself starts fading early so invitation is visible
+   while pocket still slides — cinematic overlap like film editing */
 #envelopeScreen.is-opening{
   pointer-events:none;
-  transition:opacity 0s 3.2s ease;
   opacity:0;
+  transition:opacity 1.1s 1.2s cubic-bezier(0.4, 0, 1, 1);
 }
 
 /* =========================================================
@@ -1432,7 +1433,8 @@ function openEnvelope() {
   // Act 1+2: Seal dissolves + lid begins hinging (immediately)
   envScreen.classList.add('is-opening');
 
-  // Act 4: Start invitation unfurl after the lid is well open
+  // Act 4: L-cut — start invitation rising while pocket is still going down.
+  // Overlay is already fading (1.2s CSS delay), invitation rises underneath.
   setTimeout(() => {
     // Pin the 0% keyframe state as inline styles BEFORE swapping classes,
     // so there is zero visible snap between envelope-locked and envelope-unfurling.
@@ -1457,7 +1459,7 @@ function openEnvelope() {
         window.scrollTo(0, 0);
       });
     });
-  }, 1900);
+  }, 1100);
 
   // Cleanup: after all animations finish, freeze final state then release scroll
   setTimeout(() => {
