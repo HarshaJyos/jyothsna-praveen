@@ -171,7 +171,7 @@ h1,h2,h3{text-wrap:balance}
   box-shadow:inset 0 1px 2px rgba(255,255,255,0.6);
 }
 
-/* TOP FLAP WRAPPER (Renders Unclipped Realistic Drop Shadow onto Pocket) */
+/* TOP FLAP WRAPPER (Soft, Realistic, Elegant Paper Shadow) */
 .env-flap-top-wrapper{
   position:absolute;
   inset:0;
@@ -181,9 +181,9 @@ h1,h2,h3{text-wrap:balance}
   pointer-events:none;
   transform-origin:top center;
   filter:
-    drop-shadow(0 6px 12px rgba(18,5,2,0.42))
-    drop-shadow(0 18px 34px rgba(18,5,2,0.55))
-    drop-shadow(0 42px 76px rgba(18,5,2,0.4));
+    drop-shadow(0 3px 8px rgba(35, 12, 4, 0.14))
+    drop-shadow(0 10px 22px rgba(35, 12, 4, 0.12))
+    drop-shadow(0 20px 42px rgba(35, 12, 4, 0.08));
   will-change:transform, filter, opacity;
   transition:transform 1s cubic-bezier(0.35, 0, 0.2, 1), filter 0.8s ease, opacity 0.45s 0.95s ease;
 }
@@ -211,12 +211,12 @@ h1,h2,h3{text-wrap:balance}
   position:absolute;
   inset:0;
   clip-path:polygon(0 0, 50% 50%, 100% 0);
-  border-bottom:2.2px solid rgba(255,255,255,0.95);
-  box-shadow:inset 0 -4px 8px rgba(35,10,3,0.2), inset 0 2px 4px rgba(255,255,255,0.75);
+  border-bottom:1.8px solid rgba(255,255,255,0.92);
+  box-shadow:inset 0 -2px 5px rgba(35,10,3,0.12), inset 0 1.5px 3px rgba(255,255,255,0.7);
 }
 
 /* =========================================================
-   EMBOSSED MONOGRAM SEAL (STATIC ROYAL CRIMSON RED & GOLD-LIGHT)
+   EMBOSSED MONOGRAM SEAL (AUTHENTIC LUXURY WAX & GOLD FOIL)
    ========================================================= */
 .seal-container{
   position:absolute;
@@ -230,76 +230,94 @@ h1,h2,h3{text-wrap:balance}
 }
 
 .embossed-seal{
-  width:clamp(120px, 17vw, 158px);
-  height:clamp(120px, 17vw, 158px);
+  width:clamp(122px, 17vw, 156px);
+  height:clamp(122px, 17vw, 156px);
   border-radius:50%;
   position:relative;
   background:
-    radial-gradient(circle at 34% 28%, #D33D29 0%, #A82B19 40%, #7D1A0D 80%, #540D04 100%);
+    radial-gradient(circle at 35% 28%, #D43825 0%, #A82414 42%, #751409 78%, #4A0A04 100%);
   box-shadow:
-    0 24px 50px -6px rgba(45,8,4,0.68),
-    0 8px 22px rgba(0,0,0,0.32),
-    0 0 0 2.5px rgba(244,229,202,0.9),
-    0 0 0 4.5px rgba(168,43,25,0.5),
-    0 0 22px rgba(201,147,62,0.3),
-    inset 0 4px 8px rgba(255,255,255,0.45),
-    inset 0 -6px 14px rgba(40,6,2,0.6);
+    0 16px 36px -4px rgba(45,10,5,0.5),
+    0 4px 14px rgba(0,0,0,0.22),
+    0 0 0 1.5px rgba(255,225,180,0.5),
+    0 0 0 4px rgba(168,36,20,0.4),
+    inset 0 3px 6px rgba(255,255,255,0.38),
+    inset 0 -5px 12px rgba(35,6,2,0.65);
   display:grid;
   place-items:center;
 }
 .embossed-seal::before{
   content:"";
   position:absolute;
-  inset:3px;
+  inset:6px;
   border-radius:50%;
-  background:radial-gradient(circle at 34% 25%, rgba(255,255,255,0.35) 0%, transparent 60%);
+  background:
+    radial-gradient(circle at 35% 30%, #BA2A1A 0%, #8D1A0E 60%, #5E0D05 100%);
+  box-shadow:
+    inset 0 3px 7px rgba(0,0,0,0.55),
+    inset 0 -2px 4px rgba(255,220,180,0.2),
+    0 1px 2px rgba(255,255,255,0.25);
+  pointer-events:none;
+}
+.embossed-seal::after{
+  content:"";
+  position:absolute;
+  top:8px;
+  left:18px;
+  right:18px;
+  height:40%;
+  border-radius:50% 50% 45% 45% / 60% 60% 30% 30%;
+  background:linear-gradient(180deg, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.02) 80%, transparent 100%);
   pointer-events:none;
 }
 
 .seal-svg{
-  width:88%;
-  height:88%;
-  filter:drop-shadow(0 2px 3px rgba(30,5,2,0.75));
+  width:84%;
+  height:84%;
+  position:relative;
+  z-index:2;
+  filter:drop-shadow(0 1.5px 2px rgba(35,6,2,0.85)) drop-shadow(0 0 1px rgba(255,230,180,0.3));
 }
 
 .seal-rim-outer{
   fill:none;
-  stroke:var(--gold-light, #F4E5CA);
-  stroke-width:1.6;
+  stroke:url(#goldFoilGrad);
+  stroke-width:1.8;
   opacity:0.95;
 }
 .seal-rim-inner{
   fill:none;
-  stroke:var(--gold-light, #F4E5CA);
+  stroke:url(#goldFoilGrad);
   stroke-width:1;
-  opacity:0.85;
+  stroke-dasharray:3 2;
+  opacity:0.9;
 }
 .seal-text-jp{
   font-family:var(--disp);
-  font-size:32px;
-  fill:#FFF5E3;
+  font-size:33px;
+  fill:url(#goldFoilGrad);
   letter-spacing:2px;
-  font-weight:600;
+  font-weight:700;
 }
 .seal-amp{
   font-family:var(--disp);
-  font-size:20px;
-  fill:var(--gold-light, #F4E5CA);
+  font-size:21px;
+  fill:url(#goldFoilGrad);
 }
 .seal-branch{
   fill:none;
-  stroke:var(--gold-light, #F4E5CA);
-  stroke-width:1.6;
+  stroke:url(#goldFoilGrad);
+  stroke-width:1.7;
   stroke-linecap:round;
   stroke-linejoin:round;
 }
 .seal-leaf{
-  fill:var(--gold-light, #F4E5CA);
-  stroke:var(--gold-light, #F4E5CA);
-  stroke-width:0.6;
+  fill:url(#goldFoilGrad);
+  stroke:url(#goldFoilGrad);
+  stroke-width:0.5;
 }
 .seal-dot{
-  fill:#FFF5E3;
+  fill:url(#goldFoilGrad);
 }
 
 /* =========================================================
@@ -958,30 +976,42 @@ html.static .sq path,html.static .wavy path{stroke-dashoffset:0!important;transi
   <div class="seal-container" id="waxSealContainer">
     <div class="embossed-seal">
       <svg viewBox="0 0 160 160" class="seal-svg" aria-hidden="true">
-        <!-- Concentric Debossed Rim -->
+        <defs>
+          <!-- Gold Foil Metallic Gradient: bright gold highlight → warm gold → antique gold shadow -->
+          <linearGradient id="goldFoilGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#FFF4D6"/>
+            <stop offset="22%"  stop-color="#F4E5A8"/>
+            <stop offset="50%"  stop-color="#D4A843"/>
+            <stop offset="78%"  stop-color="#B8882A"/>
+            <stop offset="100%" stop-color="#E8CC7A"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Outer debossed rim -->
         <circle cx="80" cy="80" r="74" class="seal-rim-outer"></circle>
+        <!-- Inner dashed rim -->
         <circle cx="80" cy="80" r="67" class="seal-rim-inner"></circle>
-        
+
         <!-- Monogram J & P -->
-        <text x="80" y="77" text-anchor="middle" class="seal-text-jp">
+        <text x="80" y="78" text-anchor="middle" class="seal-text-jp">
           J<tspan class="seal-amp">&amp;</tspan>P
         </text>
-        
+
         <!-- Botanical Wreath Stem -->
-        <path d="M46,104 C56,109 68,112 80,112 C92,112 104,109 114,104" class="seal-branch"></path>
-        
-        <!-- Left Leaves -->
-        <path d="M52,103 Q47,96 54,95 Q57,101 52,103 Z" class="seal-leaf"></path>
-        <path d="M62,107 Q58,99 65,97 Q68,104 62,107 Z" class="seal-leaf"></path>
-        <path d="M72,110 Q70,101 77,100 Q78,107 72,110 Z" class="seal-leaf"></path>
-        
+        <path d="M44,104 C54,110 67,113 80,113 C93,113 106,110 116,104" class="seal-branch"></path>
+
+        <!-- Left Leaves (larger, more detailed) -->
+        <path d="M50,104 Q44,95 52,93 Q56,100 50,104 Z" class="seal-leaf"></path>
+        <path d="M61,108 Q56,98 63,96 Q67,103 61,108 Z" class="seal-leaf"></path>
+        <path d="M72,111 Q69,101 76,100 Q78,108 72,111 Z" class="seal-leaf"></path>
+
         <!-- Right Leaves -->
-        <path d="M108,103 Q113,96 106,95 Q103,101 108,103 Z" class="seal-leaf"></path>
-        <path d="M98,107 Q102,99 95,97 Q92,104 98,107 Z" class="seal-leaf"></path>
-        <path d="M88,110 Q90,101 83,100 Q82,107 88,110 Z" class="seal-leaf"></path>
-        
-        <!-- Center Accent Dot -->
-        <circle cx="80" cy="112" r="1.5" class="seal-dot"></circle>
+        <path d="M110,104 Q116,95 108,93 Q104,100 110,104 Z" class="seal-leaf"></path>
+        <path d="M99,108 Q104,98 97,96 Q93,103 99,108 Z" class="seal-leaf"></path>
+        <path d="M88,111 Q91,101 84,100 Q82,108 88,111 Z" class="seal-leaf"></path>
+
+        <!-- Center Diamond Dot -->
+        <circle cx="80" cy="113" r="2" class="seal-dot"></circle>
       </svg>
     </div>
   </div>
