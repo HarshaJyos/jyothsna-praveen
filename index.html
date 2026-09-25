@@ -101,35 +101,139 @@ h1,h2,h3{text-wrap:balance}
   display:none;
 }
 
-/* Studio Ambient Vignette & Grain Layer */
+/* ─── PAPER TEXTURE FILTER (SVG feTurbulence linen fiber noise) ─── */
+.env-paper-noise{
+  position:absolute;
+  inset:0;
+  z-index:9;
+  pointer-events:none;
+  overflow:hidden;
+  opacity:0;
+  /* This invisible element holds the SVG filter definition */
+}
+
+/* Base Background — Warm Ivory Paper Stage */
 .env-bg-grain{
   position:absolute;
   inset:0;
-  background-color:#EFE6D8;
+  /* Rich warm linen-ivory paper base color */
+  background-color:#EDE4D3;
   background-image:
-    radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(30, 12, 4, 0.35) 100%),
-    radial-gradient(circle at 35% 25%, rgba(255,255,255,0.6) 0%, rgba(50,20,5,0.1) 100%),
-    radial-gradient(#C4B295 0.75px, transparent 0.75px);
-  background-size:100% 100%, 100% 100%, 14px 14px;
+    /* Studio vignette from edges */
+    radial-gradient(ellipse at 50% 50%, transparent 32%, rgba(28, 10, 4, 0.28) 100%),
+    /* Key light from top-left */
+    radial-gradient(ellipse at 30% 18%, rgba(255,255,255,0.72) 0%, transparent 62%),
+    /* Cross-fiber linen weave — horizontal threads */
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(178, 155, 122, 0.065) 3px,
+      rgba(178, 155, 122, 0.065) 4px
+    ),
+    /* Cross-fiber linen weave — vertical threads */
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 3px,
+      rgba(178, 155, 122, 0.065) 3px,
+      rgba(178, 155, 122, 0.065) 4px
+    ),
+    /* Fine diagonal bias weave */
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 6px,
+      rgba(195, 172, 140, 0.045) 6px,
+      rgba(195, 172, 140, 0.045) 7px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 6px,
+      rgba(195, 172, 140, 0.045) 6px,
+      rgba(195, 172, 140, 0.045) 7px
+    ),
+    /* Micro speckle grain dots */
+    radial-gradient(rgba(160, 135, 100, 0.55) 0.55px, transparent 0.55px),
+    radial-gradient(rgba(210, 190, 160, 0.35) 0.45px, transparent 0.45px);
+  background-size:
+    100% 100%,
+    100% 100%,
+    100% 4px,
+    4px 100%,
+    14px 14px,
+    14px 14px,
+    10px 10px,
+    17px 17px;
+  background-position:
+    0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 5px 5px;
   z-index:1;
+}
+/* Extra surface noise layer for depth — offset stagger */
+.env-bg-grain::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:
+    radial-gradient(rgba(140, 115, 85, 0.18) 0.6px, transparent 0.6px),
+    radial-gradient(rgba(230, 212, 185, 0.25) 0.4px, transparent 0.4px);
+  background-size:19px 19px, 11px 11px;
+  background-position:3px 3px, 8px 7px;
+  mix-blend-mode:multiply;
+}
+/* Surface shimmer — subtle directional paper sheen */
+.env-bg-grain::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(152deg,
+      rgba(255,255,255,0.22) 0%,
+      rgba(255,255,255,0.08) 35%,
+      transparent 55%,
+      rgba(45, 18, 5, 0.05) 100%
+    );
+  pointer-events:none;
 }
 
 /* Interior Lining Behind Pocket */
 .env-interior-lining{
   position:absolute;
   inset:0;
-  background:radial-gradient(ellipse at 50% 25%, #FFFDF9 0%, #F5ECDF 60%, #DFCDB4 100%);
+  background:
+    radial-gradient(ellipse at 50% 22%, #FFFDF9 0%, #F5ECDF 55%, #DCC9AE 100%);
   z-index:2;
+}
+.env-interior-lining::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  /* Matching linen weave for interior paper lining */
+  background-image:
+    repeating-linear-gradient(
+      0deg, transparent, transparent 3px,
+      rgba(160, 138, 108, 0.06) 3px, rgba(160, 138, 108, 0.06) 4px
+    ),
+    repeating-linear-gradient(
+      90deg, transparent, transparent 3px,
+      rgba(160, 138, 108, 0.06) 3px, rgba(160, 138, 108, 0.06) 4px
+    ),
+    radial-gradient(rgba(155, 130, 100, 0.35) 0.5px, transparent 0.5px),
+    radial-gradient(rgba(220, 200, 168, 0.3) 0.4px, transparent 0.4px);
+  background-size:4px 4px, 4px 4px, 12px 12px, 18px 18px;
+  background-position:0 0, 0 0, 2px 2px, 6px 9px;
+  opacity:0.7;
 }
 .env-interior-lining::after{
   content:"";
   position:absolute;
   inset:0;
   background-image:
-    radial-gradient(#C9933E 0.85px, transparent 0.85px),
-    linear-gradient(135deg, rgba(201,147,62,0.06) 25%, transparent 25%, transparent 50%, rgba(201,147,62,0.06) 50%, rgba(201,147,62,0.06) 75%, transparent 75%, transparent);
-  background-size:20px 20px, 40px 40px;
-  opacity:0.22;
+    radial-gradient(#C9933E 0.7px, transparent 0.7px),
+    linear-gradient(135deg, rgba(201,147,62,0.055) 25%, transparent 25%, transparent 50%, rgba(201,147,62,0.055) 50%, rgba(201,147,62,0.055) 75%, transparent 75%, transparent);
+  background-size:22px 22px, 44px 44px;
+  opacity:0.18;
 }
 
 /* UNIFIED ENVELOPE POCKET (One Seamless Solid Piece - No Harsh Cuts) */
@@ -153,22 +257,40 @@ h1,h2,h3{text-wrap:balance}
   content:"";
   position:absolute;
   inset:0;
-  background:
-    radial-gradient(#BBA78A 0.75px, transparent 0.75px),
-    linear-gradient(90deg, rgba(200, 180, 150, 0.035) 1px, transparent 1px),
-    linear-gradient(0deg, rgba(200, 180, 150, 0.035) 1px, transparent 1px);
-  background-size:12px 12px, 4px 4px, 4px 4px;
-  opacity:0.65;
+  /* Pocket linen texture — matching the envelope body */
+  background-image:
+    repeating-linear-gradient(
+      0deg, transparent, transparent 3px,
+      rgba(165, 142, 110, 0.07) 3px, rgba(165, 142, 110, 0.07) 4px
+    ),
+    repeating-linear-gradient(
+      90deg, transparent, transparent 3px,
+      rgba(165, 142, 110, 0.07) 3px, rgba(165, 142, 110, 0.07) 4px
+    ),
+    repeating-linear-gradient(
+      45deg, transparent, transparent 8px,
+      rgba(185, 162, 130, 0.04) 8px, rgba(185, 162, 130, 0.04) 9px
+    ),
+    repeating-linear-gradient(
+      -45deg, transparent, transparent 8px,
+      rgba(185, 162, 130, 0.04) 8px, rgba(185, 162, 130, 0.04) 9px
+    ),
+    radial-gradient(rgba(150, 128, 96, 0.42) 0.55px, transparent 0.55px),
+    radial-gradient(rgba(215, 195, 162, 0.28) 0.4px, transparent 0.4px);
+  background-size:
+    4px 4px, 4px 4px,
+    18px 18px, 18px 18px,
+    11px 11px, 16px 16px;
+  background-position:0 0, 0 0, 0 0, 0 0, 1px 2px, 7px 5px;
 }
 .env-pocket::after{
   content:"";
   position:absolute;
   inset:0;
-  /* Ultra-soft studio vignette and gentle ambient glow across the continuous pocket */
   background:
-    linear-gradient(135deg, rgba(255,255,255,0.35) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 100%, rgba(35,12,4,0.1) 0%, transparent 70%);
-  box-shadow:inset 0 1px 2px rgba(255,255,255,0.6);
+    linear-gradient(148deg, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.06) 40%, transparent 60%),
+    radial-gradient(ellipse at 50% 95%, rgba(32,10,3,0.08) 0%, transparent 65%);
+  box-shadow:inset 0 1px 2px rgba(255,255,255,0.55);
 }
 
 /* TOP FLAP WRAPPER (Soft, Realistic, Elegant Paper Shadow) */
@@ -196,8 +318,25 @@ h1,h2,h3{text-wrap:balance}
   height:100%;
   clip-path:polygon(0 0, 50% 50%, 100% 0);
   background:
-    radial-gradient(ellipse at 35% 20%, rgba(255,255,255,0.95) 0%, transparent 60%),
-    linear-gradient(175deg, #FFFEFA 0%, #F8EFE4 35%, #EADDC8 72%, #D4C0A2 100%);
+    /* Key light reflection on flap */
+    radial-gradient(ellipse at 35% 20%, rgba(255,255,255,0.92) 0%, transparent 60%),
+    /* Linen cross-fiber on flap */
+    repeating-linear-gradient(
+      0deg, transparent, transparent 3px,
+      rgba(162, 140, 108, 0.065) 3px, rgba(162, 140, 108, 0.065) 4px
+    ),
+    repeating-linear-gradient(
+      90deg, transparent, transparent 3px,
+      rgba(162, 140, 108, 0.065) 3px, rgba(162, 140, 108, 0.065) 4px
+    ),
+    radial-gradient(rgba(148, 125, 94, 0.38) 0.5px, transparent 0.5px),
+    /* Flap base gradient */
+    linear-gradient(175deg, #FFFEFA 0%, #F8EFE4 32%, #EADDC8 70%, #D4C0A2 100%);
+  background-size:
+    100% 100%,
+    4px 4px, 4px 4px,
+    13px 13px,
+    100% 100%;
 }
 .env-flap-top::before{
   content:"";
