@@ -460,77 +460,107 @@ h1,h2,h3{text-wrap:balance}
 }
 
 /* =========================================================
-   STAGED REALISTIC OPENING & WATER-UP LIQUID PULL-OUT
+   CINEMATIC ENVELOPE OPENING CHOREOGRAPHY
+   Act 1 (0.0s): Seal gracefully lifts and dissolves
+   Act 2 (0.4s): Lid slowly hinges open like a real envelope
+   Act 3 (1.2s): Pocket body glides softly downward
+   Act 4 (1.8s): Invitation rises from inside
    ========================================================= */
 
-/* 1. Seal dissolves as the top flap lifts */
+/* Act 1 — Seal floats upward and dissolves */
 #envelopeScreen.is-opening .seal-container{
-  transform:translate(-50%, -50%) scale(1.12) translateY(-24px);
+  transform:translate(-50%, -60%) scale(0.92);
   opacity:0;
-  transition:transform 0.5s cubic-bezier(0.25, 1, 0.4, 1), opacity 0.4s ease;
+  transition:
+    transform 1.1s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.8s 0.1s cubic-bezier(0.4, 0, 0.6, 1);
 }
 
-/* 2. Top Lid Flap hinges UP 180° in smooth 3D */
+/* Act 2 — Lid hinges back slowly like real paper, easing in and out */
 #envelopeScreen.is-opening .env-flap-top-wrapper{
-  transform:rotateX(180deg);
-  filter:drop-shadow(0 -18px 28px rgba(0,0,0,0.2));
+  transform:perspective(1400px) rotateX(-178deg);
+  filter:drop-shadow(0 -12px 22px rgba(0,0,0,0.12));
   opacity:0;
-  transition:transform 1.25s 0.08s cubic-bezier(0.25, 1, 0.35, 1), filter 1s ease, opacity 0.45s 0.95s ease;
+  transition:
+    transform 1.8s 0.4s cubic-bezier(0.76, 0, 0.24, 1),
+    filter 1.4s 0.4s ease,
+    opacity 0.5s 2.0s ease;
 }
 
-/* 3. The remaining pocket stays INTACT and glides DOWN as one unit */
+/* Act 3 — Pocket slides down softly, like the envelope body sinking */
 #envelopeScreen.is-opening .env-pocket{
-  transform:translateY(115vh);
+  transform:translateY(108vh);
   opacity:0;
-  transition:transform 1.35s 0.35s cubic-bezier(0.22, 0.9, 0.3, 1), opacity 0.7s 0.8s ease;
+  transition:
+    transform 1.6s 1.3s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.9s 2.0s ease;
 }
 
-/* 4. Full envelope screen fades out */
+/* Act 4 — Envelope screen itself fades out last */
 #envelopeScreen.is-opening{
-  opacity:0;
   pointer-events:none;
-  transition:opacity 0.7s 1s ease;
+  transition:opacity 0s 3.2s ease;
+  opacity:0;
 }
 
-/* 5. WATER-UP LIQUID PULL-OUT ANIMATION FOR INVITATION CARD */
+/* =========================================================
+   SILKY INVITATION UNFURL — Rises from inside the envelope
+   Like paper being drawn upward by an invisible hand
+   ========================================================= */
 main{
   will-change:clip-path, transform, opacity, filter;
 }
 
 body.envelope-locked main{
   opacity:0;
-  transform:scale(0.86) translateY(120px);
-  clip-path:ellipse(32% 16% at 50% 100%);
-  filter:blur(6px);
+  transform:translateY(60px) scale(0.97);
+  clip-path:inset(100% 0 0 0 round 0px);
+  filter:blur(4px);
 }
 
 body.envelope-unfurling main{
-  animation:waterPullUp 1.45s cubic-bezier(0.2, 0.85, 0.25, 1) forwards;
+  animation:invitationUnfurl 2.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes waterPullUp{
+@keyframes invitationUnfurl{
   0%{
     opacity:0;
-    transform:scale(0.86) translateY(120px);
-    clip-path:ellipse(32% 16% at 50% 100%);
-    filter:blur(6px);
+    transform:translateY(60px) scale(0.97);
+    clip-path:inset(100% 0 0 0 round 0px);
+    filter:blur(4px);
   }
-  35%{
-    opacity:0.92;
-    transform:scale(0.92) translateY(50px);
-    clip-path:ellipse(66% 46% at 50% 75%);
-    filter:blur(2.5px);
+  /* First: the very top edge of the page peeks up from the envelope mouth */
+  15%{
+    opacity:0.6;
+    transform:translateY(40px) scale(0.975);
+    clip-path:inset(88% 0 0 0 round 2px);
+    filter:blur(3px);
   }
-  70%{
+  /* The page continues rising — a wide band now visible, like paper sliding out */
+  38%{
+    opacity:0.85;
+    transform:translateY(20px) scale(0.985);
+    clip-path:inset(55% 0 0 0 round 4px);
+    filter:blur(1.5px);
+  }
+  /* More than half the page is out — the natural deceleration begins */
+  62%{
+    opacity:0.95;
+    transform:translateY(8px) scale(0.994);
+    clip-path:inset(22% 0 0 0 round 6px);
+    filter:blur(0.4px);
+  }
+  /* Final settle — page fully revealed, gently easing to rest */
+  85%{
     opacity:1;
-    transform:scale(0.98) translateY(10px);
-    clip-path:ellipse(96% 82% at 50% 50%);
-    filter:blur(0.5px);
+    transform:translateY(2px) scale(1);
+    clip-path:inset(3% 0 0 0 round 8px);
+    filter:blur(0);
   }
   100%{
     opacity:1;
-    transform:scale(1) translateY(0);
-    clip-path:ellipse(160% 160% at 50% 50%);
+    transform:translateY(0) scale(1);
+    clip-path:inset(0% 0 0 0 round 0px);
     filter:blur(0);
   }
 }
@@ -1399,25 +1429,27 @@ function openEnvelope() {
   if (isEnvelopeOpened || !envScreen) return;
   isEnvelopeOpened = true;
 
-  // Lock scroll strictly to top during opening
+  // Lock scroll at top for entire sequence
   window.scrollTo(0, 0);
+  document.body.style.overflow = 'hidden';
 
-  // 1. Trigger top lid opening and intact pocket sliding down
+  // Act 1+2: Seal dissolves + lid begins hinging (immediately)
   envScreen.classList.add('is-opening');
 
-  // 2. Trigger liquid water-up pull-out animation for website
+  // Act 4: Invitation begins rising from inside the envelope (after lid is well open)
   setTimeout(() => {
     document.body.classList.remove('envelope-locked');
     document.body.classList.add('envelope-unfurling');
     window.scrollTo(0, 0);
-  }, 160);
+  }, 1900);
 
-  // 3. Remove envelope overlay completely & trigger squiggles
+  // Cleanup: Remove envelope overlay after all animations finish
   setTimeout(() => {
     envScreen.classList.add('opened-done');
+    document.body.style.overflow = '';
     initSmoothScroll();
     triggerInitialReveals();
-  }, 1300);
+  }, 3800);
 }
 
 if (envScreen) {
