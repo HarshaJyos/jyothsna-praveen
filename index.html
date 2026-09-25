@@ -171,19 +171,20 @@ h1,h2,h3{text-wrap:balance}
   box-shadow:inset 0 1px 2px rgba(255,255,255,0.6);
 }
 
-/* TOP FLAP (THE HINGING LID - Photoshop Multi-Layer Depth & Studio Highlights) */
+/* TOP FLAP (THE HINGING LID - Photoshop Multi-Layer Depth & Pronounced Shadow) */
 .env-flap-top{
   position:absolute;
   inset:0;
   clip-path:polygon(0 0, 50% 50%, 100% 0);
   background:
-    radial-gradient(ellipse at 35% 20%, rgba(255,255,255,0.92) 0%, transparent 60%),
+    radial-gradient(ellipse at 35% 20%, rgba(255,255,255,0.95) 0%, transparent 60%),
     linear-gradient(175deg, #FFFEFA 0%, #F8EFE4 35%, #EADDC8 72%, #D4C0A2 100%);
   transform-origin:top center;
   filter:
-    drop-shadow(0 4px 8px rgba(35,12,4,0.22))
-    drop-shadow(0 16px 32px rgba(35,12,4,0.28))
-    drop-shadow(0 38px 65px rgba(35,12,4,0.16));
+    drop-shadow(0 4px 8px rgba(20,5,2,0.38))
+    drop-shadow(0 14px 26px rgba(20,5,2,0.46))
+    drop-shadow(0 34px 60px rgba(20,5,2,0.36))
+    drop-shadow(0 64px 95px rgba(20,5,2,0.22));
   z-index:6;
   pointer-events:none;
   will-change:transform, filter;
@@ -201,12 +202,12 @@ h1,h2,h3{text-wrap:balance}
   position:absolute;
   inset:0;
   clip-path:polygon(0 0, 50% 50%, 100% 0);
-  border-bottom:2px solid rgba(255,255,255,0.9);
-  box-shadow:inset 0 -2px 4px rgba(45,15,5,0.08);
+  border-bottom:2.2px solid rgba(255,255,255,0.95);
+  box-shadow:inset 0 -4px 8px rgba(35,10,3,0.2), inset 0 2px 4px rgba(255,255,255,0.75);
 }
 
 /* =========================================================
-   EMBOSSED MONOGRAM SEAL (MULTI-STAGE RELIEF DEPTH)
+   EMBOSSED MONOGRAM SEAL (ROYAL CRIMSON RED & GOLD-LIGHT)
    ========================================================= */
 .seal-container{
   position:absolute;
@@ -220,71 +221,99 @@ h1,h2,h3{text-wrap:balance}
 }
 
 .embossed-seal{
-  width:clamp(116px, 16.5vw, 154px);
-  height:clamp(116px, 16.5vw, 154px);
+  width:clamp(120px, 17vw, 158px);
+  height:clamp(120px, 17vw, 158px);
   border-radius:50%;
   position:relative;
-  background:radial-gradient(circle at 35% 30%, #FFFFFF 0%, #FAF3E8 40%, #EFE1CC 80%, #D8C3A4 100%);
+  background:
+    radial-gradient(circle at 34% 28%, #D33D29 0%, #A82B19 40%, #7D1A0D 80%, #540D04 100%);
   box-shadow:
-    0 22px 48px -6px rgba(35,15,5,0.48),
-    0 6px 16px rgba(0,0,0,0.14),
-    0 0 0 1.5px rgba(255,255,255,0.9),
-    0 0 0 3px rgba(185,155,120,0.35),
-    inset 0 3px 6px rgba(255,255,255,0.98),
-    inset 0 -5px 10px rgba(80,50,20,0.32);
+    0 22px 48px -6px rgba(45,8,4,0.65),
+    0 8px 20px rgba(0,0,0,0.3),
+    0 0 0 2px rgba(244,229,202,0.85),
+    0 0 0 4px rgba(168,43,25,0.5),
+    inset 0 4px 8px rgba(255,255,255,0.45),
+    inset 0 -6px 14px rgba(40,6,2,0.6);
   display:grid;
   place-items:center;
   animation:sealBreathing 3.6s infinite ease-in-out;
+}
+.embossed-seal::before{
+  content:"";
+  position:absolute;
+  inset:3px;
+  border-radius:50%;
+  background:radial-gradient(circle at 34% 25%, rgba(255,255,255,0.35) 0%, transparent 60%);
+  pointer-events:none;
 }
 
 .seal-svg{
   width:88%;
   height:88%;
-  filter:drop-shadow(0 1px 1px rgba(255,255,255,0.8));
+  filter:drop-shadow(0 2px 3px rgba(30,5,2,0.75));
 }
 
 .seal-rim-outer{
   fill:none;
-  stroke:#967E5F;
-  stroke-width:1.5;
-  opacity:0.9;
+  stroke:var(--gold-light, #F4E5CA);
+  stroke-width:1.6;
+  opacity:0.95;
 }
 .seal-rim-inner{
   fill:none;
-  stroke:#7D6546;
-  stroke-width:0.9;
-  opacity:0.95;
+  stroke:var(--gold-light, #F4E5CA);
+  stroke-width:1;
+  opacity:0.85;
 }
 .seal-text-jp{
   font-family:var(--disp);
   font-size:32px;
-  fill:#463520;
-  letter-spacing:1.5px;
+  fill:#FFF5E3;
+  letter-spacing:2px;
+  font-weight:600;
 }
 .seal-amp{
   font-family:var(--disp);
   font-size:20px;
-  fill:#644F34;
+  fill:var(--gold-light, #F4E5CA);
 }
 .seal-branch{
   fill:none;
-  stroke:#644F34;
-  stroke-width:1.4;
+  stroke:var(--gold-light, #F4E5CA);
+  stroke-width:1.6;
   stroke-linecap:round;
   stroke-linejoin:round;
 }
 .seal-leaf{
-  fill:#644F34;
-  stroke:#644F34;
-  stroke-width:0.5;
+  fill:var(--gold-light, #F4E5CA);
+  stroke:var(--gold-light, #F4E5CA);
+  stroke-width:0.6;
 }
 .seal-dot{
-  fill:#644F34;
+  fill:#FFF5E3;
 }
 
 @keyframes sealBreathing{
-  0%, 100%{ transform:scale(1); box-shadow:0 18px 40px -6px rgba(45,20,10,0.42), 0 0 0 1px rgba(255,255,255,0.85); }
-  50%{ transform:scale(1.025); box-shadow:0 22px 46px -6px rgba(45,20,10,0.52), 0 0 24px 6px rgba(201,147,62,0.35); }
+  0%, 100%{
+    transform:scale(1);
+    box-shadow:
+      0 20px 44px -6px rgba(45,8,4,0.6),
+      0 0 0 2px rgba(244,229,202,0.8),
+      0 0 0 4px rgba(168,43,25,0.4),
+      0 0 16px 2px rgba(201,147,62,0.25),
+      inset 0 4px 8px rgba(255,255,255,0.4),
+      inset 0 -6px 14px rgba(40,6,2,0.6);
+  }
+  50%{
+    transform:scale(1.03);
+    box-shadow:
+      0 26px 54px -6px rgba(45,8,4,0.72),
+      0 0 32px 10px rgba(201,147,62,0.5),
+      0 0 0 2.5px rgba(244,229,202,0.95),
+      0 0 0 5px rgba(201,147,62,0.6),
+      inset 0 5px 10px rgba(255,255,255,0.5),
+      inset 0 -7px 16px rgba(40,6,2,0.7);
+  }
 }
 
 /* =========================================================
