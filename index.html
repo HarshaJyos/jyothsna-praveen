@@ -519,7 +519,7 @@ body.envelope-locked main{
 }
 
 body.envelope-unfurling main{
-  animation:invitationUnfurl 2.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation:invitationUnfurl 2.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @keyframes invitationUnfurl{
@@ -529,34 +529,28 @@ body.envelope-unfurling main{
     clip-path:inset(100% 0 0 0 round 0px);
     filter:blur(4px);
   }
-  /* First: the very top edge of the page peeks up from the envelope mouth */
-  15%{
-    opacity:0.6;
-    transform:translateY(40px) scale(0.975);
-    clip-path:inset(88% 0 0 0 round 2px);
-    filter:blur(3px);
+  /* Top edge peeks from the envelope mouth */
+  12%{
+    opacity:0.55;
+    transform:translateY(44px) scale(0.973);
+    clip-path:inset(90% 0 0 0 round 0px);
+    filter:blur(3.5px);
   }
-  /* The page continues rising — a wide band now visible, like paper sliding out */
-  38%{
+  /* Wide band rising — like paper sliding upward */
+  36%{
     opacity:0.85;
-    transform:translateY(20px) scale(0.985);
-    clip-path:inset(55% 0 0 0 round 4px);
-    filter:blur(1.5px);
+    transform:translateY(22px) scale(0.984);
+    clip-path:inset(56% 0 0 0 round 0px);
+    filter:blur(1.8px);
   }
-  /* More than half the page is out — the natural deceleration begins */
+  /* More than half out — deceleration begins */
   62%{
-    opacity:0.95;
+    opacity:0.96;
     transform:translateY(8px) scale(0.994);
-    clip-path:inset(22% 0 0 0 round 6px);
-    filter:blur(0.4px);
+    clip-path:inset(20% 0 0 0 round 0px);
+    filter:blur(0.3px);
   }
-  /* Final settle — page fully revealed, gently easing to rest */
-  85%{
-    opacity:1;
-    transform:translateY(2px) scale(1);
-    clip-path:inset(3% 0 0 0 round 8px);
-    filter:blur(0);
-  }
+  /* Page fully out — one smooth final glide to rest, NO bounce */
   100%{
     opacity:1;
     transform:translateY(0) scale(1);
@@ -1429,6 +1423,8 @@ function openEnvelope() {
   if (isEnvelopeOpened || !envScreen) return;
   isEnvelopeOpened = true;
 
+  const mainEl = $('main');
+
   // Lock scroll at top for entire sequence
   window.scrollTo(0, 0);
   document.body.style.overflow = 'hidden';
@@ -1436,20 +1432,49 @@ function openEnvelope() {
   // Act 1+2: Seal dissolves + lid begins hinging (immediately)
   envScreen.classList.add('is-opening');
 
-  // Act 4: Invitation begins rising from inside the envelope (after lid is well open)
+  // Act 4: Start invitation unfurl after the lid is well open
   setTimeout(() => {
-    document.body.classList.remove('envelope-locked');
-    document.body.classList.add('envelope-unfurling');
-    window.scrollTo(0, 0);
+    // Pin the 0% keyframe state as inline styles BEFORE swapping classes,
+    // so there is zero visible snap between envelope-locked and envelope-unfurling.
+    if (mainEl) {
+      mainEl.style.opacity = '0';
+      mainEl.style.transform = 'translateY(60px) scale(0.97)';
+      mainEl.style.clipPath = 'inset(100% 0 0 0 round 0px)';
+      mainEl.style.filter = 'blur(4px)';
+    }
+    // Double rAF: first frame pins the inline styles, second starts the CSS animation
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        document.body.classList.remove('envelope-locked');
+        document.body.classList.add('envelope-unfurling');
+        // Clear inline styles so the @keyframes animation fully owns the values
+        if (mainEl) {
+          mainEl.style.opacity = '';
+          mainEl.style.transform = '';
+          mainEl.style.clipPath = '';
+          mainEl.style.filter = '';
+        }
+        window.scrollTo(0, 0);
+      });
+    });
   }, 1900);
 
-  // Cleanup: Remove envelope overlay after all animations finish
+  // Cleanup: after all animations finish, freeze final state then release scroll
   setTimeout(() => {
+    // Atomically pin the clean final state before removing animation
+    if (mainEl) {
+      mainEl.style.opacity = '1';
+      mainEl.style.transform = 'none';
+      mainEl.style.clipPath = 'none';
+      mainEl.style.filter = 'none';
+      mainEl.style.animation = 'none';
+    }
+    window.scrollTo(0, 0);
     envScreen.classList.add('opened-done');
     document.body.style.overflow = '';
     initSmoothScroll();
     triggerInitialReveals();
-  }, 3800);
+  }, 4600);
 }
 
 if (envScreen) {
