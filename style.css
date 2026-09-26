@@ -464,7 +464,7 @@ body.invitation-body {
   bottom: 0;
   height: 92%;
   max-height: 870px;
-  z-index: 5;
+  z-index: 25;
   pointer-events: none;
   display: flex;
   align-items: flex-end;
@@ -1795,7 +1795,7 @@ body.invitation-body {
     max-height: 300px;
     min-height: 220px;
     width: auto;
-    z-index: 6;
+    z-index: 25;
     display: flex;
     align-items: flex-end;
     justify-content: center;
