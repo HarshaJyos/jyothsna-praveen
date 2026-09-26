@@ -218,16 +218,26 @@ function initDoorIntroSequence() {
 
   if (!overlay || !video) return;
 
-  // Ensure scroll is at top
+  // Guarantee hero section is ready at top
   window.scrollTo(0, 0);
   if (lenisInstance) {
     lenisInstance.scrollTo(0, { immediate: true });
   }
 
+  // Pre-load video immediately
+  try {
+    video.muted = true;
+    video.defaultMuted = true;
+    video.load();
+  } catch (e) {}
+
   let hasStarted = false;
   let hasTriggeredGlow = false;
 
-  function startIntroDoorPlay() {
+  function startIntroDoorPlay(e) {
+    if (e && e.stopPropagation) {
+      e.stopPropagation();
+    }
     if (hasStarted) return;
     hasStarted = true;
 
@@ -235,24 +245,45 @@ function initDoorIntroSequence() {
       tapBadge.classList.add('faded');
     }
 
-    // Unmute & Play video
-    video.muted = false;
+    // Always ensure muted=true on video element for guaranteed instant playback in all browsers
+    video.muted = true;
+    video.defaultMuted = true;
+    video.currentTime = 0;
+
     const playPromise = video.play();
     if (playPromise !== undefined) {
-      playPromise.catch(() => {
-        // Autoplay policy fallback (play muted if browser forbids unmuted autoplay)
+      playPromise.then(() => {
+        // Video playing smoothly
+      }).catch((err) => {
+        console.warn("Autoplay notice, retrying with direct play:", err);
         video.muted = true;
-        video.play().catch(() => {});
+        video.play().catch(() => {
+          onDoorOpeningFinish();
+        });
       });
     }
 
-    // Start melodious harp accompaniment
-    toggleAudio(true);
+    // Start melodious harp accompaniment via Web Audio
+    try {
+      toggleAudio(true);
+    } catch (e) {}
+
+    // Safety timeout in case video ends or stalls unexpectedly
+    setTimeout(() => {
+      if (!hasTriggeredGlow) {
+        onDoorOpeningFinish();
+      }
+    }, 6000);
   }
 
-  // Trigger on click or touch anywhere on the overlay
+  // Attach listeners across all interaction types
   overlay.addEventListener('click', startIntroDoorPlay);
+  overlay.addEventListener('pointerdown', startIntroDoorPlay);
   overlay.addEventListener('touchstart', startIntroDoorPlay, { passive: true });
+  if (tapBadge) {
+    tapBadge.addEventListener('click', startIntroDoorPlay);
+    tapBadge.addEventListener('pointerdown', startIntroDoorPlay);
+  }
 
   function onDoorOpeningFinish() {
     if (hasTriggeredGlow) return;
@@ -292,10 +323,15 @@ function initDoorIntroSequence() {
   video.addEventListener('timeupdate', () => {
     if (video.duration && video.duration > 0) {
       // Near end of the door opening video, start radiant glow transition
-      if (video.currentTime >= video.duration - 0.3) {
+      if (video.currentTime >= video.duration - 0.35) {
         onDoorOpeningFinish();
       }
     }
+  });
+
+  video.addEventListener('error', (e) => {
+    console.warn("Video load error:", e);
+    onDoorOpeningFinish();
   });
 }
 

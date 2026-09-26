@@ -140,85 +140,50 @@ body.invitation-body {
   pointer-events: none;
 }
 
-/* Tap to Open Call-to-action Badge */
+/* Minimalist Glassmorphic Door Push Badge */
 .tap-to-open-badge {
   position: absolute;
-  bottom: 11%;
+  bottom: 8%;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 10;
+  z-index: 20;
   pointer-events: none;
   transition: opacity 0.4s ease, transform 0.4s ease;
   width: auto;
-  max-width: 90vw;
 }
 
 .tap-to-open-badge.faded {
   opacity: 0;
-  transform: translateX(-50%) scale(0.9);
+  transform: translateX(-50%) scale(0.92);
 }
 
-.tap-badge-inner {
-  position: relative;
-  background: rgba(46, 19, 51, 0.88);
-  border: 1.5px solid var(--gold-accent);
-  border-radius: 40px;
-  padding: 0.85rem 2.2rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.2rem;
+.glass-door-badge {
+  background: rgba(255, 252, 248, 0.28);
+  border: 1px solid rgba(229, 190, 107, 0.55);
+  border-radius: 30px;
+  padding: 0.55rem 1.6rem;
   backdrop-filter: blur(14px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.65), 0 0 30px rgba(201, 155, 66, 0.4);
-}
-
-.tap-pulse-ring {
-  position: absolute;
-  inset: -6px;
-  border-radius: 46px;
-  border: 2px solid rgba(229, 190, 107, 0.7);
-  animation: pulseGlowRing 2.2s infinite ease-out;
-}
-
-@keyframes pulseGlowRing {
-  0% { transform: scale(0.98); opacity: 0.85; }
-  50% { transform: scale(1.04); opacity: 0.25; }
-  100% { transform: scale(0.98); opacity: 0.85; }
-}
-
-.tap-icon-circle {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: var(--gold-gradient);
-  color: var(--purple-deep);
-  display: flex;
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), 0 0 15px rgba(229, 190, 107, 0.2);
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 0.2rem;
-  box-shadow: 0 0 16px rgba(201, 155, 66, 0.7);
+  animation: gentleBadgeFloat 3s ease-in-out infinite alternate;
 }
 
-.tap-icon-circle i {
-  width: 20px;
-  height: 20px;
+@keyframes gentleBadgeFloat {
+  0% { transform: translateY(0); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2), 0 0 10px rgba(229, 190, 107, 0.15); }
+  100% { transform: translateY(-3px); box-shadow: 0 14px 35px rgba(0, 0, 0, 0.32), 0 0 22px rgba(229, 190, 107, 0.35); }
 }
 
-.tap-title {
+.door-badge-text {
   font-family: var(--font-editorial);
-  font-size: 1.15rem;
-  font-weight: 800;
-  letter-spacing: 3px;
-  color: #FFFDF9;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 3.5px;
+  color: #3D1F44;
   text-transform: uppercase;
-}
-
-.tap-sub {
-  font-family: var(--font-sans);
-  font-size: 0.78rem;
-  color: var(--gold-light);
-  letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.7);
 }
 
 /* FULLSCREEN RADIANT GLOW TRANSITION EFFECT */
