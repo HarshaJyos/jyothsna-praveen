@@ -1114,23 +1114,30 @@ body.invitation-body {
   background: linear-gradient(135deg, #7A4B85, #5C2B66);
   color: #FFFDF9;
   border: 1px solid var(--gold-accent);
-  padding: 0.85rem 2rem;
-  border-radius: 35px;
-  font-family: var(--font-body);
-  font-size: 0.95rem;
+  padding: 0.65rem 1.6rem;
+  border-radius: 30px;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
   font-weight: 600;
+  letter-spacing: 0.5px;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.5rem;
+  white-space: nowrap;
   transition: var(--transition-smooth);
-  box-shadow: 0 8px 25px rgba(92, 43, 102, 0.3);
+  box-shadow: 0 6px 20px rgba(92, 43, 102, 0.28);
+}
+
+.venue-maps-btn i {
+  width: 16px;
+  height: 16px;
 }
 
 .venue-maps-btn:hover {
   background: linear-gradient(135deg, #8C3A7A, #3D1F44);
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(92, 43, 102, 0.45);
+  box-shadow: 0 10px 25px rgba(92, 43, 102, 0.4);
 }
 
 /* ==========================================================================
