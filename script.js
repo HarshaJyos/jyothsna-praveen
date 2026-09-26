@@ -492,7 +492,6 @@ function initCountdown() {
    ========================================================================== */
 function setupCalendarHandlers() {
   const googleBtn = document.getElementById('googleCalBtn');
-  const icsBtn = document.getElementById('icsCalBtn');
 
   const eventDetails = {
     title: "Engagement Ceremony | Mandapalli Jyothsna & Palleti Praveen Kumar",
@@ -506,35 +505,6 @@ function setupCalendarHandlers() {
     googleBtn.addEventListener('click', () => {
       const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventDetails.title)}&dates=${eventDetails.startDate}/${eventDetails.endDate}&details=${encodeURIComponent(eventDetails.description)}&location=${encodeURIComponent(eventDetails.location)}`;
       window.open(gCalUrl, '_blank');
-    });
-  }
-
-  if (icsBtn) {
-    icsBtn.addEventListener('click', () => {
-      const icsData = [
-        "BEGIN:VCALENDAR",
-        "VERSION:2.0",
-        "PRODID:-//Engagement Ceremony//Jyothsna & Praveen//EN",
-        "CALSCALE:GREGORIAN",
-        "METHOD:PUBLISH",
-        "BEGIN:VEVENT",
-        `DTSTART:${eventDetails.startDate}`,
-        `DTEND:${eventDetails.endDate}`,
-        `SUMMARY:${eventDetails.title}`,
-        `DESCRIPTION:${eventDetails.description.replace(/\n/g, '\\n')}`,
-        `LOCATION:${eventDetails.location}`,
-        "STATUS:CONFIRMED",
-        "END:VEVENT",
-        "END:VCALENDAR"
-      ].join("\r\n");
-
-      const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
-      const link = document.createElement('a');
-      link.href = window.URL.createObjectURL(blob);
-      link.setAttribute('download', 'Jyothsna_Praveen_Engagement.ics');
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
     });
   }
 }
