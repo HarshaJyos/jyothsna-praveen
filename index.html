@@ -24,64 +24,33 @@
   <!-- Interactive Petals & Sparkle Canvas -->
   <canvas id="petalCanvas" class="bg-canvas"></canvas>
 
-  <!-- GRAND ENVELOPE / ROYAL WAX SEAL OPENING OVERLAY -->
-  <div id="royalEnvelopeOverlay" class="royal-envelope-overlay">
-    <div class="envelope-container">
-      <div class="envelope-card-glow"></div>
-      <div class="envelope-outer">
-        
-        <!-- Floral Top Arch -->
-        <div class="envelope-floral-crest">
-          <svg viewBox="0 0 200 40" class="floral-crest-svg">
-            <path d="M10,20 Q60,35 100,10 Q140,35 190,20" fill="none" stroke="#C99B42" stroke-width="1.5" stroke-dasharray="3,3"/>
-            <circle cx="100" cy="10" r="5" fill="#7A4B85"/>
-            <circle cx="70" cy="22" r="3.5" fill="#A876B5"/>
-            <circle cx="130" cy="22" r="3.5" fill="#A876B5"/>
-          </svg>
+  <!-- GRAND CEREMONY DOOR OPENING INTRO VIDEO OVERLAY -->
+  <div id="introVideoOverlay" class="intro-video-overlay" role="button" aria-label="Tap to Open Grand Invitation">
+    <video
+      id="introDoorVideo"
+      class="intro-door-video"
+      src="img/intro_anim.mp4"
+      playsinline
+      webkit-playsinline
+      preload="auto"
+      muted
+    ></video>
+    
+    <!-- Tap to Open Callout Badge -->
+    <div id="tapToOpenBadge" class="tap-to-open-badge">
+      <div class="tap-badge-inner">
+        <div class="tap-pulse-ring"></div>
+        <div class="tap-icon-circle">
+          <i data-lucide="sparkles"></i>
         </div>
-
-        <div class="envelope-emblem">
-          <div class="mandala-spin-slow">
-            <svg viewBox="0 0 100 100" class="mandala-vector">
-              <circle cx="50" cy="50" r="46" fill="none" stroke="url(#goldGrad)" stroke-width="1.2" stroke-dasharray="3, 3"/>
-              <circle cx="50" cy="50" r="38" fill="none" stroke="url(#goldGrad)" stroke-width="1"/>
-              <path d="M50,14 C56,32 68,44 86,50 C68,56 56,68 50,86 C44,68 32,56 14,50 C32,44 44,32 50,14 Z" fill="url(#goldGrad)" opacity="0.25"/>
-              <circle cx="50" cy="50" r="16" fill="none" stroke="url(#goldGrad)" stroke-width="1.5"/>
-              <text x="50" y="54" text-anchor="middle" font-family="'Cinzel', serif" font-size="11" font-weight="700" fill="#F4E5CA" letter-spacing="1">J &amp; P</text>
-              <defs>
-                <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#E5BE6B"/>
-                  <stop offset="50%" stop-color="#FFF5DC"/>
-                  <stop offset="100%" stop-color="#9E6F25"/>
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-        </div>
-
-        <div class="envelope-heading">
-          <span class="sub-lead">Auspicious Celebration</span>
-          <h1 class="envelope-title">Engagement Invitation</h1>
-          <div class="couple-preview-names">
-            <span>Mandapalli Jyothsna</span>
-            <span class="amp">&amp;</span>
-            <span>Palleti Praveen Kumar</span>
-          </div>
-        </div>
-
-        <div class="wax-seal-wrapper">
-          <button id="openInviteBtn" class="wax-seal-btn" aria-label="Open Invitation">
-            <div class="seal-inner">
-              <i data-lucide="sparkles" class="seal-icon"></i>
-              <span class="seal-text">OPEN INVITATION</span>
-            </div>
-            <div class="seal-pulse"></div>
-          </button>
-          <p class="seal-hint">Tap the royal seal to begin the celebration</p>
-        </div>
+        <span class="tap-title">TAP TO OPEN</span>
+        <span class="tap-sub">Touch anywhere to enter the celebration</span>
       </div>
     </div>
   </div>
+
+  <!-- FULLSCREEN RADIANT GLOW TRANSITION EFFECT -->
+  <div id="screenGlowEffect" class="screen-glow-effect"></div>
 
   <!-- MAIN WRAPPER -->
   <main class="invitation-main" id="mainContent">

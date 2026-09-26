@@ -11,9 +11,22 @@
  *  - Digital Guestbook & Live Feed
  */
 
+// Force browser to start at hero section at every refresh
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
+window.addEventListener('beforeunload', () => {
+  window.scrollTo(0, 0);
+});
+
 let lenisInstance = null;
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Always ensure top position
+  window.scrollTo(0, 0);
+
   // Initialize Lucide icons
   if (window.lucide) {
     window.lucide.createIcons();
@@ -22,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize Ultra-Smooth Lenis Scrolling
   initSmoothScroll();
 
+  initDoorIntroSequence();
   initPetalCanvas();
   initCountdown();
   initScrollReveal();
@@ -194,20 +208,94 @@ function animateParticles() {
 }
 
 /* ==========================================================================
-   3. ROYAL WAX SEAL ENVELOPE OPENING
+   3. GRAND CEREMONY DOOR OPENING INTRO SEQUENCE & FULLSCREEN GLOW
    ========================================================================== */
-const openInviteBtn = document.getElementById('openInviteBtn');
-const royalEnvelopeOverlay = document.getElementById('royalEnvelopeOverlay');
+function initDoorIntroSequence() {
+  const overlay = document.getElementById('introVideoOverlay');
+  const video = document.getElementById('introDoorVideo');
+  const tapBadge = document.getElementById('tapToOpenBadge');
+  const glow = document.getElementById('screenGlowEffect');
 
-if (openInviteBtn && royalEnvelopeOverlay) {
-  openInviteBtn.addEventListener('click', () => {
-    triggerGrandFlowerShower();
+  if (!overlay || !video) return;
+
+  // Ensure scroll is at top
+  window.scrollTo(0, 0);
+  if (lenisInstance) {
+    lenisInstance.scrollTo(0, { immediate: true });
+  }
+
+  let hasStarted = false;
+  let hasTriggeredGlow = false;
+
+  function startIntroDoorPlay() {
+    if (hasStarted) return;
+    hasStarted = true;
+
+    if (tapBadge) {
+      tapBadge.classList.add('faded');
+    }
+
+    // Unmute & Play video
+    video.muted = false;
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // Autoplay policy fallback (play muted if browser forbids unmuted autoplay)
+        video.muted = true;
+        video.play().catch(() => {});
+      });
+    }
+
+    // Start melodious harp accompaniment
     toggleAudio(true);
-    royalEnvelopeOverlay.classList.add('opened');
+  }
+
+  // Trigger on click or touch anywhere on the overlay
+  overlay.addEventListener('click', startIntroDoorPlay);
+  overlay.addEventListener('touchstart', startIntroDoorPlay, { passive: true });
+
+  function onDoorOpeningFinish() {
+    if (hasTriggeredGlow) return;
+    hasTriggeredGlow = true;
+
+    // Trigger full screen radiant heavenly glow
+    if (glow) {
+      glow.classList.add('active-glow');
+    }
 
     setTimeout(() => {
-      if (window.lucide) window.lucide.createIcons();
-    }, 300);
+      // Dismiss video overlay behind the glow
+      overlay.classList.add('dismissed');
+
+      // Guarantee hero section is shown
+      window.scrollTo(0, 0);
+      if (lenisInstance) {
+        lenisInstance.scrollTo(0, { immediate: true });
+      }
+
+      // Shower flower petals
+      triggerGrandFlowerShower();
+
+      // Smoothly dissolve the glow to reveal the website hero section
+      if (glow) {
+        glow.classList.remove('active-glow');
+        glow.classList.add('fading-glow');
+        setTimeout(() => {
+          glow.classList.remove('fading-glow');
+        }, 900);
+      }
+    }, 450);
+  }
+
+  video.addEventListener('ended', onDoorOpeningFinish);
+
+  video.addEventListener('timeupdate', () => {
+    if (video.duration && video.duration > 0) {
+      // Near end of the door opening video, start radiant glow transition
+      if (video.currentTime >= video.duration - 0.3) {
+        onDoorOpeningFinish();
+      }
+    }
   });
 }
 

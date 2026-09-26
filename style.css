@@ -107,184 +107,143 @@ body.invitation-body {
 }
 
 /* ==========================================================================
-   ROYAL ENVELOPE / WAX SEAL OPENING OVERLAY
+   GRAND CEREMONY DOOR OPENING INTRO VIDEO OVERLAY & GLOW EFFECT
    ========================================================================== */
-.royal-envelope-overlay {
+.intro-video-overlay {
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(46, 19, 51, 0.98), rgba(20, 8, 24, 0.99));
-  z-index: 1000;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10000;
+  background-color: #0d0413;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.5rem;
-  backdrop-filter: blur(20px);
-  transition: transform 0.85s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.7s ease;
+  overflow: hidden;
+  cursor: pointer;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s;
   transform: translateZ(0);
 }
 
-.royal-envelope-overlay.opened {
-  transform: translateY(-100%);
+.intro-video-overlay.dismissed {
   opacity: 0;
-  pointer-events: none;
   visibility: hidden;
-}
-
-.envelope-container {
-  position: relative;
-  max-width: 520px;
-  width: 100%;
-}
-
-.envelope-card-glow {
-  position: absolute;
-  inset: -15px;
-  background: radial-gradient(circle, rgba(201, 155, 66, 0.35) 0%, rgba(122, 75, 133, 0.25) 50%, transparent 75%);
-  filter: blur(20px);
-  border-radius: 30px;
-  animation: pulseGlow 4s ease-in-out infinite alternate;
-}
-
-.envelope-outer {
-  position: relative;
-  z-index: 2;
-  background: linear-gradient(165deg, #3D1F44, #240C29);
-  border: 2px solid var(--gold-accent);
-  border-radius: 20px;
-  padding: 3rem 2rem 2.5rem;
-  text-align: center;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), inset 0 0 35px rgba(201, 155, 66, 0.15);
-  overflow: hidden;
-}
-
-.envelope-outer::before {
-  content: '';
-  position: absolute;
-  inset: 8px;
-  border: 1px dashed rgba(229, 190, 107, 0.4);
-  border-radius: 14px;
   pointer-events: none;
 }
 
-.envelope-floral-crest {
+.intro-door-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  pointer-events: none;
+}
+
+/* Tap to Open Call-to-action Badge */
+.tap-to-open-badge {
   position: absolute;
-  top: 12px;
-  left: 0;
-  right: 0;
-  width: 100%;
-}
-.floral-crest-svg {
-  width: 140px;
-  height: 28px;
-  margin: 0 auto;
-  display: block;
+  bottom: 11%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  width: auto;
+  max-width: 90vw;
 }
 
-.envelope-emblem {
-  margin: 1.5rem auto 1.2rem;
-  width: 90px;
-  height: 90px;
+.tap-to-open-badge.faded {
+  opacity: 0;
+  transform: translateX(-50%) scale(0.9);
 }
 
-.mandala-spin-slow {
-  width: 100%;
-  height: 100%;
-  animation: spinClockwise 25s linear infinite;
-}
-
-.mandala-vector {
-  width: 100%;
-  height: 100%;
-  filter: drop-shadow(0 0 8px rgba(201, 155, 66, 0.6));
-}
-
-.envelope-heading .sub-lead {
-  font-family: var(--font-serif);
-  color: var(--gold-accent);
-  text-transform: uppercase;
-  letter-spacing: 4px;
-  font-size: 0.8rem;
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-.envelope-title {
-  font-family: var(--font-display);
-  font-size: 1.8rem;
-  background: var(--gold-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 1rem;
-}
-
-.couple-preview-names {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  font-family: var(--font-serif);
-  font-size: 1.15rem;
-  color: var(--text-light);
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-}
-
-.couple-preview-names .amp {
-  font-family: var(--font-script);
-  color: var(--gold-accent);
-  font-size: 1.8rem;
-}
-
-.wax-seal-wrapper {
-  margin-top: 1.5rem;
-}
-
-.wax-seal-btn {
+.tap-badge-inner {
   position: relative;
-  background: radial-gradient(circle at 35% 35%, #8C3A7A, #5C2B66, #36143D);
-  border: 2px solid var(--gold-accent);
-  border-radius: 50px;
-  padding: 1rem 2.2rem;
-  color: #fff;
-  cursor: pointer;
-  box-shadow: 0 10px 25px rgba(92, 43, 102, 0.6), inset 0 2px 6px rgba(255, 255, 255, 0.4);
-  transition: var(--transition-smooth);
-  display: inline-flex;
+  background: rgba(46, 19, 51, 0.88);
+  border: 1.5px solid var(--gold-accent);
+  border-radius: 40px;
+  padding: 0.85rem 2.2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  outline: none;
+  gap: 0.2rem;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.65), 0 0 30px rgba(201, 155, 66, 0.4);
 }
 
-.wax-seal-btn:hover {
-  transform: translateY(-3px) scale(1.04);
-  box-shadow: 0 15px 35px rgba(92, 43, 102, 0.8), 0 0 20px rgba(229, 190, 107, 0.6);
+.tap-pulse-ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: 46px;
+  border: 2px solid rgba(229, 190, 107, 0.7);
+  animation: pulseGlowRing 2.2s infinite ease-out;
 }
 
-.seal-inner {
+@keyframes pulseGlowRing {
+  0% { transform: scale(0.98); opacity: 0.85; }
+  50% { transform: scale(1.04); opacity: 0.25; }
+  100% { transform: scale(0.98); opacity: 0.85; }
+}
+
+.tap-icon-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--gold-gradient);
+  color: var(--purple-deep);
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  justify-content: center;
+  margin-bottom: 0.2rem;
+  box-shadow: 0 0 16px rgba(201, 155, 66, 0.7);
 }
 
-.seal-icon {
+.tap-icon-circle i {
   width: 20px;
   height: 20px;
+}
+
+.tap-title {
+  font-family: var(--font-editorial);
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: #FFFDF9;
+  text-transform: uppercase;
+}
+
+.tap-sub {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
   color: var(--gold-light);
-  animation: sparkleSpin 3s infinite ease-in-out;
+  letter-spacing: 0.5px;
 }
 
-.seal-text {
-  font-family: var(--font-serif);
-  font-weight: 700;
-  letter-spacing: 2px;
-  font-size: 0.95rem;
+/* FULLSCREEN RADIANT GLOW TRANSITION EFFECT */
+.screen-glow-effect {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10001;
+  pointer-events: none;
+  background: radial-gradient(circle at center, #FFFFFF 0%, #FFF5DC 40%, rgba(244, 229, 202, 0.96) 70%, rgba(201, 155, 66, 0.85) 100%);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.45s ease-out;
 }
 
-.seal-hint {
-  margin-top: 0.8rem;
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.6);
-  font-style: italic;
+.screen-glow-effect.active-glow {
+  visibility: visible;
+  opacity: 1;
+}
+
+.screen-glow-effect.fading-glow {
+  visibility: visible;
+  opacity: 0;
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ==========================================================================
