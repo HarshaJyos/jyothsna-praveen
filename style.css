@@ -114,6 +114,8 @@ body.invitation-body {
   inset: 0;
   width: 100vw;
   height: 100vh;
+  height: 100svh;
+  height: 100dvh;
   z-index: 10000;
   background-color: #0d0413;
   display: flex;
@@ -121,6 +123,7 @@ body.invitation-body {
   justify-content: center;
   overflow: hidden;
   cursor: pointer;
+  touch-action: manipulation;
   transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s;
   transform: translateZ(0);
 }
@@ -140,16 +143,18 @@ body.invitation-body {
   pointer-events: none;
 }
 
-/* Minimalist Glassmorphic Door Push Badge */
+/* Minimalist Glassmorphic Door Push Badge (Dynamically Calculated for All Viewports) */
 .tap-to-open-badge {
   position: absolute;
-  bottom: 8%;
+  bottom: clamp(18px, 5.5svh, 36px);
+  bottom: clamp(18px, 5.5vh, 36px);
   left: 50%;
   transform: translateX(-50%);
   z-index: 20;
   pointer-events: none;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  width: auto;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  width: max-content;
+  max-width: min(88vw, 320px);
 }
 
 .tap-to-open-badge.faded {
@@ -158,13 +163,13 @@ body.invitation-body {
 }
 
 .glass-door-badge {
-  background: rgba(255, 252, 248, 0.28);
-  border: 1px solid rgba(229, 190, 107, 0.55);
-  border-radius: 30px;
-  padding: 0.55rem 1.6rem;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), 0 0 15px rgba(229, 190, 107, 0.2);
+  background: rgba(255, 252, 248, 0.32);
+  border: 1px solid rgba(229, 190, 107, 0.6);
+  border-radius: 999px;
+  padding: clamp(0.35rem, 1.1vh, 0.52rem) clamp(0.9rem, 3.2vw, 1.35rem);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.22), 0 0 12px rgba(229, 190, 107, 0.2);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -172,18 +177,32 @@ body.invitation-body {
 }
 
 @keyframes gentleBadgeFloat {
-  0% { transform: translateY(0); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2), 0 0 10px rgba(229, 190, 107, 0.15); }
-  100% { transform: translateY(-3px); box-shadow: 0 14px 35px rgba(0, 0, 0, 0.32), 0 0 22px rgba(229, 190, 107, 0.35); }
+  0% { transform: translateY(0); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2), 0 0 8px rgba(229, 190, 107, 0.15); }
+  100% { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28), 0 0 16px rgba(229, 190, 107, 0.3); }
 }
 
 .door-badge-text {
   font-family: var(--font-editorial);
-  font-size: 0.88rem;
+  font-size: clamp(0.68rem, 2.3vw, 0.82rem);
   font-weight: 700;
-  letter-spacing: 3.5px;
+  letter-spacing: clamp(1.5px, 0.5vw, 2.8px);
   color: #3D1F44;
   text-transform: uppercase;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.75);
+}
+
+@media (max-height: 600px) {
+  .tap-to-open-badge {
+    bottom: 14px;
+  }
+  .glass-door-badge {
+    padding: 0.3rem 0.85rem;
+  }
+  .door-badge-text {
+    font-size: 0.68rem;
+    letter-spacing: 1.5px;
+  }
 }
 
 /* FULLSCREEN RADIANT GLOW TRANSITION EFFECT */
