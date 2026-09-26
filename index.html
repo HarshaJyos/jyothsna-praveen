@@ -348,96 +348,7 @@
     </section>
 
     <!-- =========================================================
-         SECTION 5: INTERACTIVE BLESSINGS & GUESTBOOK
-         ========================================================= -->
-    <section class="thematic-section blessings-section-bg" id="blessings-section">
-      <div class="section-overlay-texture"></div>
-      <div class="section-content-wrapper">
-
-        <div class="section-header-pill reveal-up">
-          <i data-lucide="sparkles"></i>
-          <span>Shower Love</span>
-        </div>
-
-        <h2 class="section-title reveal-up delay-1">Send Your Blessings &amp; Wishes</h2>
-        <div class="section-title-divider">
-          <span></span><i data-lucide="heart" class="divider-heart"></i><span></span>
-        </div>
-
-        <div class="blessings-interactive-box reveal-up delay-2">
-          
-          <!-- Instant Flower Shower Big Button -->
-          <div class="pushpa-shower-area">
-            <button class="pushpa-grand-btn" id="showerFlowersBtn" onclick="triggerGrandFlowerShower()">
-              <div class="btn-ripple"></div>
-              <i data-lucide="sparkles" class="btn-star-icon"></i>
-              <span class="pushpa-title">SHOWER BLESSINGS &amp; PETALS</span>
-              <span class="pushpa-sub">Tap to rain golden and lilac flower petals</span>
-            </button>
-            <div class="shower-counter">
-              <i data-lucide="heart" class="counter-heart"></i>
-              <span id="blessingCountDisplay">1,248</span> Floral Blessings Showered
-            </div>
-          </div>
-
-          <!-- Digital Guestbook -->
-          <div class="guestbook-card">
-            <h3 class="guestbook-title">Write a Blessing for Jyothsna &amp; Praveen</h3>
-            
-            <div class="quick-tags-row">
-              <button type="button" class="tag-chip" onclick="insertQuickWish('Wishing you both a lifetime of love, joy, and peace!')">
-                <i data-lucide="sparkles"></i> <span>Lifetime of Joy</span>
-              </button>
-              <button type="button" class="tag-chip" onclick="insertQuickWish('Congratulations on your engagement! May God richly bless your union.')">
-                <i data-lucide="heart"></i> <span>God Bless You</span>
-              </button>
-              <button type="button" class="tag-chip" onclick="insertQuickWish('Excited to celebrate with you at S.S. Venue on Oct 3rd!')">
-                <i data-lucide="calendar"></i> <span>Excited to Join</span>
-              </button>
-            </div>
-
-            <form id="wishesForm" onsubmit="handleSendWish(event)">
-              <div class="form-row">
-                <label for="guestName">Your Name / Family Name</label>
-                <input type="text" id="guestName" placeholder="e.g. John &amp; Family" required>
-              </div>
-              <div class="form-row">
-                <label for="guestMessage">Your Message / Blessing</label>
-                <textarea id="guestMessage" rows="3" placeholder="Share your warm thoughts and prayers..." required></textarea>
-              </div>
-              <button type="submit" class="submit-wish-btn">
-                <i data-lucide="send"></i>
-                <span>Send Blessing</span>
-              </button>
-            </form>
-
-            <div class="wishes-stream" id="wishesFeed">
-              <div class="wish-item">
-                <div class="wish-meta">
-                  <span class="wish-sender"><i data-lucide="heart"></i> Anand &amp; Sunitha</span>
-                  <span class="wish-date">Just now</span>
-                </div>
-                <p class="wish-text">Heartiest congratulations Jyothsna and Praveen! May your bond grow stronger with each passing day. Can't wait to celebrate on Oct 3rd!</p>
-              </div>
-
-              <div class="wish-item">
-                <div class="wish-meta">
-                  <span class="wish-sender"><i data-lucide="heart"></i> Joseph &amp; Family</span>
-                  <span class="wish-date">10 mins ago</span>
-                </div>
-                <p class="wish-text">Wishing the wonderful couple eternal grace, prosperity, and joy as you begin this beautiful new chapter together.</p>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- =========================================================
-         SECTION 6: SOCIAL SHARE BAR
+         SECTION 5: SOCIAL SHARE BAR
          ========================================================= -->
     <section class="thematic-section share-section-bg">
       <div class="section-overlay-texture"></div>
@@ -470,12 +381,6 @@
     </footer>
 
   </main>
-
-  <!-- FLOATING QUICK BLESSING BUTTON -->
-  <button class="floating-flower-fab" onclick="triggerGrandFlowerShower()" title="Shower Blessings" aria-label="Shower Blessings">
-    <i data-lucide="sparkles"></i>
-    <span>Blessings</span>
-  </button>
 
   <script src="script.js"></script>
 </body>
