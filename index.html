@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engagement Ceremony — Mandapalli Jyothsna &amp; Palleti Praveen Kumar</title>
+<meta name="description" content="Engagement Ceremony of Mandapalli Jyothsna and Palleti Praveen Kumar on 03 October 2026 at S.S. Venue, Kondagunturu.">
+<meta name="robots" content="noindex">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel+Decorative:wght@600;700;900&family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fonts.css">
+
+<!-- Lucide Icons & Canvas Confetti -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script src="lenis.min.js"></script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="invitation-body">
+
+  <!-- Interactive Petals & Sparkle Canvas -->
+  <canvas id="petalCanvas" class="bg-canvas"></canvas>
+
+  <!-- Ambient Wedding Music Toggle Button -->
+  <div class="audio-control-wrapper">
+    <button id="audioToggleBtn" class="audio-toggle-btn" title="Toggle Wedding Melody" aria-label="Toggle Wedding Music">
+      <div class="audio-wave">
+        <span></span><span></span><span></span><span></span>
+      </div>
+      <i data-lucide="music-2" class="audio-icon"></i>
+      <span class="audio-label">Music</span>
+    </button>
+  </div>
+
+  <!-- GRAND ENVELOPE / ROYAL WAX SEAL OPENING OVERLAY -->
+  <div id="royalEnvelopeOverlay" class="royal-envelope-overlay">
+    <div class="envelope-container">
+      <div class="envelope-card-glow"></div>
+      <div class="envelope-outer">
+        
+        <!-- Floral Top Arch -->
+        <div class="envelope-floral-crest">
+          <svg viewBox="0 0 200 40" class="floral-crest-svg">
+            <path d="M10,20 Q60,35 100,10 Q140,35 190,20" fill="none" stroke="#C99B42" stroke-width="1.5" stroke-dasharray="3,3"/>
+            <circle cx="100" cy="10" r="5" fill="#7A4B85"/>
+            <circle cx="70" cy="22" r="3.5" fill="#A876B5"/>
+            <circle cx="130" cy="22" r="3.5" fill="#A876B5"/>
+          </svg>
+        </div>
+
+        <div class="envelope-emblem">
+          <div class="mandala-spin-slow">
+            <svg viewBox="0 0 100 100" class="mandala-vector">
+              <circle cx="50" cy="50" r="46" fill="none" stroke="url(#goldGrad)" stroke-width="1.2" stroke-dasharray="3, 3"/>
+              <circle cx="50" cy="50" r="38" fill="none" stroke="url(#goldGrad)" stroke-width="1"/>
+              <path d="M50,14 C56,32 68,44 86,50 C68,56 56,68 50,86 C44,68 32,56 14,50 C32,44 44,32 50,14 Z" fill="url(#goldGrad)" opacity="0.25"/>
+              <circle cx="50" cy="50" r="16" fill="none" stroke="url(#goldGrad)" stroke-width="1.5"/>
+              <text x="50" y="54" text-anchor="middle" font-family="'Cinzel', serif" font-size="11" font-weight="700" fill="#F4E5CA" letter-spacing="1">J &amp; P</text>
+              <defs>
+                <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#E5BE6B"/>
+                  <stop offset="50%" stop-color="#FFF5DC"/>
+                  <stop offset="100%" stop-color="#9E6F25"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+        </div>
+
+        <div class="envelope-heading">
+          <span class="sub-lead">Auspicious Celebration</span>
+          <h1 class="envelope-title">Engagement Invitation</h1>
+          <div class="couple-preview-names">
+            <span>Mandapalli Jyothsna</span>
+            <span class="amp">&amp;</span>
+            <span>Palleti Praveen Kumar</span>
+          </div>
+        </div>
+
+        <div class="wax-seal-wrapper">
+          <button id="openInviteBtn" class="wax-seal-btn" aria-label="Open Invitation">
+            <div class="seal-inner">
+              <i data-lucide="sparkles" class="seal-icon"></i>
+              <span class="seal-text">OPEN INVITATION</span>
+            </div>
+            <div class="seal-pulse"></div>
+          </button>
+          <p class="seal-hint">Tap the royal seal to begin the celebration</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING QUICK NAVIGATION -->
+  <nav class="royal-floating-nav">
+    <div class="nav-brand">J <span class="nav-gold">&amp;</span> P</div>
+    <div class="nav-actions">
+      <button class="nav-btn" onclick="scrollToSection('hero')">
+        <i data-lucide="home"></i> <span>Invitation</span>
+      </button>
+      <button class="nav-btn" onclick="scrollToSection('countdown-section')">
+        <i data-lucide="calendar"></i> <span>Date</span>
+      </button>
+      <button class="nav-btn" onclick="scrollToSection('family-section')">
+        <i data-lucide="heart-handshake"></i> <span>Family</span>
+      </button>
+      <button class="nav-btn" onclick="scrollToSection('venue-section')">
+        <i data-lucide="map-pin"></i> <span>Venue</span>
+      </button>
+      <button class="nav-btn highlight-nav-btn" onclick="triggerGrandFlowerShower()">
+        <i data-lucide="flower-2"></i> <span>Blessings</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MAIN WRAPPER -->
+  <main class="invitation-main" id="mainContent">
+
+    <!-- =========================================================
+         HERO SECTION: PARALLAX STAGE (BACKGROUND + COUPLE + INVITATION ARCH)
+         ========================================================= -->
+    <section class="hero-stage-section" id="hero">
+      <div class="hero-stage-container">
+        
+        <!-- Base Background Image -->
+        <img src="img/background.png" alt="Engagement Ceremony Background" class="hero-bg-img" id="heroBgImg">
+
+        <!-- Standalone Couple Cutout with Breathing & Depth Animation -->
+        <div class="hero-couple-wrapper" id="heroCoupleWrapper">
+          <img src="img/couple.png" alt="Mandapalli Jyothsna and Palleti Praveen Kumar" class="hero-couple-img">
+          <div class="couple-soft-shadow"></div>
+        </div>
+
+        <!-- Invitation Parchment Card (Inside the Scalloped Golden Arch) -->
+        <div class="hero-arch-card" id="heroArchCard">
+          <div class="arch-card-inner">
+            
+            <div class="blessing-invocation">
+              <span class="cross-icon-wrap"><i data-lucide="sparkle"></i></span>
+              <p class="blessing-text">With the blessings of our beloved elders</p>
+              <span class="cross-icon-wrap"><i data-lucide="sparkle"></i></span>
+            </div>
+
+            <div class="ceremony-type-banner">
+              <span class="gold-line"></span>
+              <h2 class="ceremony-headline">ENGAGEMENT CEREMONY</h2>
+              <span class="gold-line"></span>
+            </div>
+
+            <div class="couple-names-block">
+              <h1 class="bride-name">Mandapalli Jyothsna</h1>
+              <div class="names-connector">
+                <span class="knot-script">&amp;</span>
+              </div>
+              <h1 class="groom-name">Palleti Praveen Kumar</h1>
+            </div>
+
+            <p class="invitation-cordial-prose">
+              cordially invite you to celebrate their Engagement Ceremony as they unite in love, faith, and lifelong togetherness.
+            </p>
+
+            <div class="ceremony-quick-meta">
+              <div class="meta-item">
+                <i data-lucide="calendar" class="meta-ico"></i>
+                <span>03 October 2026</span>
+              </div>
+              <span class="meta-dot">&bull;</span>
+              <div class="meta-item">
+                <i data-lucide="map-pin" class="meta-ico"></i>
+                <span>S.S. Venue, Kondagunturu</span>
+              </div>
+            </div>
+
+            <div class="arch-action-group">
+              <button class="arch-btn-primary" onclick="scrollToSection('countdown-section')">
+                <i data-lucide="calendar-heart"></i> Save The Date
+              </button>
+              <button class="arch-btn-secondary" onclick="scrollToSection('venue-section')">
+                <i data-lucide="navigation"></i> View Venue
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Mobile Fallback Content Container for Small Devices -->
+      <div class="mobile-hero-details">
+        <div class="mobile-card-frame">
+          <div class="blessing-invocation">
+            <p class="blessing-text">With the blessings of our beloved elders</p>
+          </div>
+          <h2 class="ceremony-headline">ENGAGEMENT CEREMONY</h2>
+          <div class="couple-names-block">
+            <h1 class="bride-name">Mandapalli Jyothsna</h1>
+            <div class="names-connector"><span class="knot-script">&amp;</span></div>
+            <h1 class="groom-name">Palleti Praveen Kumar</h1>
+          </div>
+          <p class="invitation-cordial-prose">
+            cordially invite you to celebrate their Engagement Ceremony
+          </p>
+          <div class="ceremony-quick-meta">
+            <div class="meta-item"><i data-lucide="calendar"></i> 03 October 2026</div>
+            <div class="meta-item"><i data-lucide="map-pin"></i> S.S. Venue, Kondagunturu</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SECTION 1: SAVE THE DATE & LIVE COUNTDOWN (USING SECTIONBG.PNG)
+         ========================================================= -->
+    <section class="thematic-section countdown-section-bg" id="countdown-section">
+      <div class="section-overlay-texture"></div>
+      <div class="section-content-wrapper">
+        
+        <div class="section-header-pill reveal-up">
+          <i data-lucide="gem"></i>
+          <span>Save The Auspicious Date</span>
+        </div>
+        
+        <h2 class="section-title reveal-up delay-1">Counting Down to the Divine Union</h2>
+        <div class="section-title-divider">
+          <span></span><i data-lucide="heart" class="divider-heart"></i><span></span>
+        </div>
+
+        <div class="countdown-hero-card reveal-up delay-2">
+          <div class="card-gold-rim"></div>
+          
+          <div class="date-large-display">
+            <span class="day-word">Saturday</span>
+            <span class="full-date">03 October 2026</span>
+            <span class="sub-venue">S.S. Venue, Kondagunturu</span>
+          </div>
+
+          <!-- Dynamic Timer Grid -->
+          <div class="timer-grid" id="countdownGrid">
+            <div class="timer-box">
+              <span class="timer-number" id="daysVal">00</span>
+              <span class="timer-label">Days</span>
+            </div>
+            <div class="timer-box">
+              <span class="timer-number" id="hoursVal">00</span>
+              <span class="timer-label">Hours</span>
+            </div>
+            <div class="timer-box">
+              <span class="timer-number" id="minsVal">00</span>
+              <span class="timer-label">Mins</span>
+            </div>
+            <div class="timer-box">
+              <span class="timer-number" id="secsVal">00</span>
+              <span class="timer-label">Secs</span>
+            </div>
+          </div>
+
+          <!-- Calendar Add Buttons -->
+          <div class="calendar-buttons-row">
+            <button class="cal-btn gold-cal" id="googleCalBtn">
+              <i data-lucide="calendar-plus"></i> Add to Google Calendar
+            </button>
+            <button class="cal-btn outline-cal" id="icsCalBtn">
+              <i data-lucide="download"></i> Apple / Outlook (.ics)
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SECTION 2: FAMILY HERITAGE & PARENTS' BLESSINGS
+         ========================================================= -->
+    <section class="thematic-section family-section-bg" id="family-section">
+      <div class="section-overlay-texture"></div>
+      <div class="section-content-wrapper">
+        
+        <div class="section-header-pill reveal-up">
+          <i data-lucide="heart-handshake"></i>
+          <span>Sacred Bonds</span>
+        </div>
+        
+        <h2 class="section-title reveal-up delay-1">With the Blessings of Our Families</h2>
+        <div class="section-title-divider">
+          <span></span><i data-lucide="flower-2" class="divider-heart"></i><span></span>
+        </div>
+
+        <div class="family-cards-grid reveal-up delay-2">
+          
+          <!-- BRIDE'S SIDE -->
+          <div class="family-honor-card bride-card">
+            <div class="card-crest-icon">
+              <i data-lucide="sparkles"></i>
+            </div>
+            <span class="family-badge">The Bride</span>
+            <h3 class="member-name">Mandapalli Jyothsna</h3>
+            <div class="parent-lineage-box">
+              <span class="lineage-label">Daughter of</span>
+              <h4 class="parent-honored">Late Mandapalli Prasad</h4>
+              <span class="parent-amp">&amp;</span>
+              <h4 class="parent-honored">Mrs. Vijaya</h4>
+            </div>
+            <p class="family-clan-tag">Mandapalli Family</p>
+          </div>
+
+          <!-- SACRED KNOT DIVIDER -->
+          <div class="family-center-knot">
+            <div class="knot-circle">
+              <span class="knot-char">&amp;</span>
+            </div>
+            <p class="knot-phrase">Two Families United in Love &amp; Grace</p>
+          </div>
+
+          <!-- GROOM'S SIDE -->
+          <div class="family-honor-card groom-card">
+            <div class="card-crest-icon">
+              <i data-lucide="crown"></i>
+            </div>
+            <span class="family-badge">The Groom</span>
+            <h3 class="member-name">Palleti Praveen Kumar</h3>
+            <div class="parent-lineage-box">
+              <span class="lineage-label">Son of</span>
+              <h4 class="parent-honored">Mr. Palleti Ganeswara Rao</h4>
+              <span class="parent-amp">&amp;</span>
+              <h4 class="parent-honored">Mrs. Mary</h4>
+            </div>
+            <p class="family-clan-tag">Palleti Family</p>
+          </div>
+
+        </div>
+
+        <!-- HEARTFELT CLOSING QUOTE -->
+        <div class="heartfelt-quote-box reveal-up delay-3">
+          <div class="quote-symbol">“</div>
+          <p class="quote-text">
+            Your presence and blessings will make our celebration even more special.
+          </p>
+          <span class="quote-sub">— Mandapalli &amp; Palleti Families —</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SECTION 3: CEREMONY ORDER & SCHEDULE
+         ========================================================= -->
+    <section class="thematic-section schedule-section-bg" id="schedule-section">
+      <div class="section-overlay-texture"></div>
+      <div class="section-content-wrapper">
+
+        <div class="section-header-pill reveal-up">
+          <i data-lucide="clock"></i>
+          <span>Order of Events</span>
+        </div>
+
+        <h2 class="section-title reveal-up delay-1">Ceremony Itinerary</h2>
+        <div class="section-title-divider">
+          <span></span><i data-lucide="gem" class="divider-heart"></i><span></span>
+        </div>
+
+        <div class="timeline-container reveal-up delay-2">
+          
+          <div class="timeline-item">
+            <div class="time-col">10:00 AM</div>
+            <div class="dot-col"><div class="timeline-dot"></div></div>
+            <div class="info-col">
+              <h4>Welcoming of Guests</h4>
+              <p>Warm reception and gathering of loved ones</p>
+            </div>
+          </div>
+
+          <div class="timeline-item highlight-item">
+            <div class="time-col">10:30 AM</div>
+            <div class="dot-col"><div class="timeline-dot highlight-dot"></div></div>
+            <div class="info-col">
+              <h4>Solemn Engagement Ceremony</h4>
+              <p>Exchange of rings and prayer with elders' blessings</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="time-col">12:00 PM</div>
+            <div class="dot-col"><div class="timeline-dot"></div></div>
+            <div class="info-col">
+              <h4>Blessings &amp; Photo Session</h4>
+              <p>Felicitations, well wishes &amp; group photographs</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="time-col">12:30 PM</div>
+            <div class="dot-col"><div class="timeline-dot"></div></div>
+            <div class="info-col">
+              <h4>Celebratory Feast</h4>
+              <p>Grand festive lunch served in honor of the celebration</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SECTION 4: THE GRAND VENUE & ROUTE NAVIGATION
+         ========================================================= -->
+    <section class="thematic-section venue-section-bg" id="venue-section">
+      <div class="section-overlay-texture"></div>
+      <div class="section-content-wrapper">
+
+        <div class="section-header-pill reveal-up">
+          <i data-lucide="map-pin"></i>
+          <span>The Destination</span>
+        </div>
+
+        <h2 class="section-title reveal-up delay-1">Venue &amp; Location</h2>
+        <div class="section-title-divider">
+          <span></span><i data-lucide="navigation" class="divider-heart"></i><span></span>
+        </div>
+
+        <div class="venue-main-card reveal-up delay-2">
+          <div class="venue-icon-header">
+            <div class="venue-icon-circle">
+              <i data-lucide="landmark"></i>
+            </div>
+            <h3 class="venue-title">S.S. Venue</h3>
+            <p class="venue-address">Kondagunturu, Andhra Pradesh</p>
+          </div>
+
+          <div class="venue-features-list">
+            <div class="feature-chip"><i data-lucide="sparkles"></i> Grand Banquet Hall</div>
+            <div class="feature-chip"><i data-lucide="utensils"></i> Festive Lunch</div>
+            <div class="feature-chip"><i data-lucide="car"></i> Guest Parking Available</div>
+          </div>
+
+          <div class="venue-cta-wrap">
+            <a href="https://maps.app.goo.gl/o4W5Bzf2MsF22cyV8" target="_blank" rel="noopener noreferrer" class="venue-maps-btn">
+              <i data-lucide="navigation-2"></i>
+              <span>Get Directions on Google Maps</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SECTION 5: INTERACTIVE BLESSINGS & GUESTBOOK
+         ========================================================= -->
+    <section class="thematic-section blessings-section-bg" id="blessings-section">
+      <div class="section-overlay-texture"></div>
+      <div class="section-content-wrapper">
+
+        <div class="section-header-pill reveal-up">
+          <i data-lucide="sparkles"></i>
+          <span>Shower Love</span>
+        </div>
+
+        <h2 class="section-title reveal-up delay-1">Send Your Blessings &amp; Wishes</h2>
+        <div class="section-title-divider">
+          <span></span><i data-lucide="heart" class="divider-heart"></i><span></span>
+        </div>
+
+        <div class="blessings-interactive-box reveal-up delay-2">
+          
+          <!-- Instant Flower Shower Big Button -->
+          <div class="pushpa-shower-area">
+            <button class="pushpa-grand-btn" id="showerFlowersBtn" onclick="triggerGrandFlowerShower()">
+              <div class="btn-ripple"></div>
+              <i data-lucide="sparkles" class="btn-star-icon"></i>
+              <span class="pushpa-title">SHOWER BLESSINGS &amp; PETALS</span>
+              <span class="pushpa-sub">Tap to rain golden and lilac flower petals</span>
+            </button>
+            <div class="shower-counter">
+              <i data-lucide="heart" class="counter-heart"></i>
+              <span id="blessingCountDisplay">1,248</span> Floral Blessings Showered
+            </div>
+          </div>
+
+          <!-- Digital Guestbook -->
+          <div class="guestbook-card">
+            <h3 class="guestbook-title">Write a Blessing for Jyothsna &amp; Praveen</h3>
+            
+            <div class="quick-tags-row">
+              <button type="button" class="tag-chip" onclick="insertQuickWish('Wishing you both a lifetime of love, joy, and peace! ✨')">✨ Lifetime of Joy</button>
+              <button type="button" class="tag-chip" onclick="insertQuickWish('Congratulations on your engagement! May God richly bless your union. 🌸')">🌸 God Bless You</button>
+              <button type="button" class="tag-chip" onclick="insertQuickWish('Excited to celebrate with you at S.S. Venue on Oct 3rd! 🎊')">🎊 Excited to Join</button>
+            </div>
+
+            <form id="wishesForm" onsubmit="handleSendWish(event)">
+              <div class="form-row">
+                <label for="guestName">Your Name / Family Name</label>
+                <input type="text" id="guestName" placeholder="e.g. John &amp; Family" required>
+              </div>
+              <div class="form-row">
+                <label for="guestMessage">Your Message / Blessing</label>
+                <textarea id="guestMessage" rows="3" placeholder="Share your warm thoughts and prayers..." required></textarea>
+              </div>
+              <button type="submit" class="submit-wish-btn">
+                <i data-lucide="send"></i>
+                <span>Send Blessing</span>
+              </button>
+            </form>
+
+            <div class="wishes-stream" id="wishesFeed">
+              <div class="wish-item">
+                <div class="wish-meta">
+                  <span class="wish-sender"><i data-lucide="heart"></i> Anand &amp; Sunitha</span>
+                  <span class="wish-date">Just now</span>
+                </div>
+                <p class="wish-text">Heartiest congratulations Jyothsna and Praveen! May your bond grow stronger with each passing day. Can't wait to celebrate on Oct 3rd!</p>
+              </div>
+
+              <div class="wish-item">
+                <div class="wish-meta">
+                  <span class="wish-sender"><i data-lucide="heart"></i> Joseph &amp; Family</span>
+                  <span class="wish-date">10 mins ago</span>
+                </div>
+                <p class="wish-text">Wishing the wonderful couple eternal grace, prosperity, and joy as you begin this beautiful new chapter together.</p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SECTION 6: SOCIAL SHARE BAR
+         ========================================================= -->
+    <section class="thematic-section share-section-bg">
+      <div class="section-overlay-texture"></div>
+      <div class="section-content-wrapper">
+        <div class="share-banner-card reveal-up">
+          <div class="share-text-side">
+            <h3 class="share-head">Share the Joy</h3>
+            <p class="share-sub">Forward this invitation card to friends &amp; family on WhatsApp.</p>
+          </div>
+          <div class="share-buttons-side">
+            <button class="btn-whatsapp" onclick="shareOnWhatsApp()">
+              <i data-lucide="share-2"></i> <span>Share on WhatsApp</span>
+            </button>
+            <button class="btn-copy" onclick="copyInviteLink()">
+              <i data-lucide="copy"></i> <span id="copyLinkText">Copy Invitation Link</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="royal-footer">
+      <p class="footer-names">Mandapalli Jyothsna &amp; Palleti Praveen Kumar</p>
+      <p class="footer-event">Engagement Ceremony &bull; 03 October 2026</p>
+      <p class="footer-venue-tag">S.S. Venue, Kondagunturu</p>
+      <div class="footer-credits">
+        With Love &amp; Blessings from Mandapalli &amp; Palleti Families
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- FLOATING QUICK BLESSING BUTTON -->
+  <button class="floating-flower-fab" onclick="triggerGrandFlowerShower()" title="Shower Blessings" aria-label="Shower Blessings">
+    <i data-lucide="sparkles"></i>
+    <span>Blessings</span>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>
