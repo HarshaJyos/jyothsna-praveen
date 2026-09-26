@@ -336,85 +336,41 @@ function initDoorIntroSequence() {
 }
 
 /* ==========================================================================
-   4. AMBIENT WEDDING HARP SYNTHESIZER (WEB AUDIO API)
+   4. WEDDING BACKGROUND MUSIC (IMG/AUDIO.MP3 IN CONTINUOUS LOOP)
    ========================================================================== */
-let audioCtx = null;
+let weddingAudio = null;
 let isAudioPlaying = false;
-let melodyInterval = null;
 
-const romanticNotes = [
-  311.13, // Eb4
-  349.23, // F4
-  392.00, // G4
-  466.16, // Bb4
-  523.25, // C5
-  622.25, // Eb5
-  698.46, // F5
-  783.99  // G5
-];
-
-const romanticPattern = [
-  0, 2, 3, 5, 4, 3, 2, 0,
-  1, 3, 4, 6, 5, 4, 3, 1,
-  2, 4, 5, 7, 6, 5, 4, 2,
-  3, 5, 4, 2, 1, 0, 0, 0
-];
-
-let noteIdx = 0;
-
-function initAudioSystem() {
-  if (!audioCtx) {
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    audioCtx = new AudioContext();
-  }
-  if (audioCtx.state === 'suspended') {
-    audioCtx.resume();
+function initWeddingAudio() {
+  if (!weddingAudio) {
+    weddingAudio = new Audio('img/audio.mp3');
+    weddingAudio.loop = true;
+    weddingAudio.preload = 'auto';
+    weddingAudio.volume = 0.85;
   }
 }
 
 function startWeddingMelody() {
-  initAudioSystem();
-  isAudioPlaying = true;
-  updateAudioBtnUI();
-
-  noteIdx = 0;
-  melodyInterval = setInterval(() => {
-    if (!isAudioPlaying || !audioCtx) return;
-    const freq = romanticNotes[romanticPattern[noteIdx % romanticPattern.length]];
-    playHarpChime(freq, 1.2);
-    noteIdx++;
-  }, 480);
-}
-
-function playHarpChime(frequency, duration) {
-  if (!audioCtx) return;
-  try {
-    const now = audioCtx.currentTime;
-    const osc = audioCtx.createOscillator();
-    const gainNode = audioCtx.createGain();
-
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(frequency, now);
-
-    gainNode.gain.setValueAtTime(0.0001, now);
-    gainNode.gain.linearRampToValueAtTime(0.07, now + 0.05);
-    gainNode.gain.exponentialRampToValueAtTime(0.0001, now + duration);
-
-    osc.connect(gainNode);
-    gainNode.connect(audioCtx.destination);
-
-    osc.start(now);
-    osc.stop(now + duration + 0.05);
-  } catch (e) {}
+  initWeddingAudio();
+  if (weddingAudio) {
+    const playPromise = weddingAudio.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        isAudioPlaying = true;
+        updateAudioBtnUI();
+      }).catch((err) => {
+        console.warn("Audio waiting for user gesture:", err);
+      });
+    }
+  }
 }
 
 function stopWeddingMelody() {
-  isAudioPlaying = false;
-  if (melodyInterval) {
-    clearInterval(melodyInterval);
-    melodyInterval = null;
+  if (weddingAudio && isAudioPlaying) {
+    weddingAudio.pause();
+    isAudioPlaying = false;
+    updateAudioBtnUI();
   }
-  updateAudioBtnUI();
 }
 
 function toggleAudio(forcePlay = null) {
