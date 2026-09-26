@@ -496,7 +496,7 @@ function handleSendWish(event) {
   nameInput.value = '';
   messageInput.value = '';
 
-  alert("✨ Thank you for sending your heartfelt blessings to Jyothsna & Praveen!");
+  alert("Thank you for sending your heartfelt blessings to Jyothsna & Praveen!");
 }
 
 function escapeHtml(str) {
@@ -507,7 +507,7 @@ function escapeHtml(str) {
    9. WHATSAPP & LINK SHARE
    ========================================================================== */
 function shareOnWhatsApp() {
-  const text = `💍 *Engagement Ceremony Invitation* 💍\n\nWith the blessings of our beloved elders, we cordially invite you to celebrate the Engagement Ceremony of\n*Mandapalli Jyothsna* & *Palleti Praveen Kumar*\n\n📅 Date: 03 October 2026\n📍 Venue: S.S. Venue, Kondagunturu\n\nView the digital card online: ${window.location.href}`;
+  const text = `*Engagement Ceremony Invitation*\n\nWith the blessings of our beloved elders, we cordially invite you to celebrate the Engagement Ceremony of\n*Mandapalli Jyothsna* & *Palleti Praveen Kumar*\n\nDate: 03 October 2026\nVenue: S.S. Venue, Kondagunturu\n\nView the digital card online: ${window.location.href}`;
   const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
   window.open(url, '_blank');
 }

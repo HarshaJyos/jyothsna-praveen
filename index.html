@@ -7,11 +7,10 @@
 <meta name="description" content="Engagement Ceremony of Mandapalli Jyothsna and Palleti Praveen Kumar on 03 October 2026 at S.S. Venue, Kondagunturu.">
 <meta name="robots" content="noindex">
 
-<!-- Google Fonts -->
+<!-- Google Fonts (Curated Luxury Wedding Typography Suite) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel+Decorative:wght@600;700;900&family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="fonts.css">
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Allura&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Cinzel+Decorative:wght@600;700;900&family=Cinzel:wght@500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Great+Vibes&family=Imperial+Script&family=Italianno&family=Josefin+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- Lucide Icons & Canvas Confetti -->
 <script src="https://unpkg.com/lucide@latest"></script>
@@ -163,16 +162,9 @@
               cordially invite you to celebrate their Engagement Ceremony as they unite in love, faith, and lifelong togetherness.
             </p>
 
-            <div class="ceremony-quick-meta">
-              <div class="meta-item">
-                <i data-lucide="calendar" class="meta-ico"></i>
-                <span>03 October 2026</span>
-              </div>
-              <span class="meta-dot">&bull;</span>
-              <div class="meta-item">
-                <i data-lucide="map-pin" class="meta-ico"></i>
-                <span>S.S. Venue, Kondagunturu</span>
-              </div>
+            <div class="ceremony-plain-date-block">
+              <p class="plain-date-text">03 October 2026</p>
+              <p class="plain-venue-text">S.S. Venue, Kondagunturu</p>
             </div>
 
             <div class="arch-action-group">
@@ -187,28 +179,6 @@
           </div>
         </div>
 
-      </div>
-
-      <!-- Mobile Fallback Content Container for Small Devices -->
-      <div class="mobile-hero-details">
-        <div class="mobile-card-frame">
-          <div class="blessing-invocation">
-            <p class="blessing-text">With the blessings of our beloved elders</p>
-          </div>
-          <h2 class="ceremony-headline">ENGAGEMENT CEREMONY</h2>
-          <div class="couple-names-block">
-            <h1 class="bride-name">Mandapalli Jyothsna</h1>
-            <div class="names-connector"><span class="knot-script">&amp;</span></div>
-            <h1 class="groom-name">Palleti Praveen Kumar</h1>
-          </div>
-          <p class="invitation-cordial-prose">
-            cordially invite you to celebrate their Engagement Ceremony
-          </p>
-          <div class="ceremony-quick-meta">
-            <div class="meta-item"><i data-lucide="calendar"></i> 03 October 2026</div>
-            <div class="meta-item"><i data-lucide="map-pin"></i> S.S. Venue, Kondagunturu</div>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -487,9 +457,15 @@
             <h3 class="guestbook-title">Write a Blessing for Jyothsna &amp; Praveen</h3>
             
             <div class="quick-tags-row">
-              <button type="button" class="tag-chip" onclick="insertQuickWish('Wishing you both a lifetime of love, joy, and peace! ✨')">✨ Lifetime of Joy</button>
-              <button type="button" class="tag-chip" onclick="insertQuickWish('Congratulations on your engagement! May God richly bless your union. 🌸')">🌸 God Bless You</button>
-              <button type="button" class="tag-chip" onclick="insertQuickWish('Excited to celebrate with you at S.S. Venue on Oct 3rd! 🎊')">🎊 Excited to Join</button>
+              <button type="button" class="tag-chip" onclick="insertQuickWish('Wishing you both a lifetime of love, joy, and peace!')">
+                <i data-lucide="sparkles"></i> <span>Lifetime of Joy</span>
+              </button>
+              <button type="button" class="tag-chip" onclick="insertQuickWish('Congratulations on your engagement! May God richly bless your union.')">
+                <i data-lucide="heart"></i> <span>God Bless You</span>
+              </button>
+              <button type="button" class="tag-chip" onclick="insertQuickWish('Excited to celebrate with you at S.S. Venue on Oct 3rd!')">
+                <i data-lucide="calendar"></i> <span>Excited to Join</span>
+              </button>
             </div>
 
             <form id="wishesForm" onsubmit="handleSendWish(event)">
